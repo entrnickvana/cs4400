@@ -1,0 +1,43 @@
+
+main.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <main>:
+   0:	b8 00 00 00 00       	mov    $0x0,%eax
+   5:	c3                   	retq   
+
+0000000000000006 <ifstmt>:
+   6:	39 f7                	cmp    %esi,%edi
+   8:	7c 04                	jl     e <ifstmt+0x8>
+   a:	8d 04 7e             	lea    (%rsi,%rdi,2),%eax
+   d:	c3                   	retq   
+   e:	8d 46 f4             	lea    -0xc(%rsi),%eax
+  11:	29 f8                	sub    %edi,%eax
+  13:	c3                   	retq   
+
+#include <stdlib.h>
+#include <stdio.h>
+
+int ifstmt(int a, int b);
+
+int main()
+{
+	ifstmt(1, 2);
+
+	return 0;
+}
+
+int ifstmt(int a, int b) {
+ int x = 0;
+ if(a >= b) {
+   x = 2 * a;
+   x += b;
+ }
+ else {
+   x = b - 12;
+   x -= a;
+ }
+ return x;
+}
