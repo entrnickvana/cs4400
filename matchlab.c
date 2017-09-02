@@ -1,8 +1,12 @@
 
-/*typedef bool;
-#define true 1
-#define false 0
-*/
+
+#define DEBUG 1
+#ifdef DEBUG
+# define DEBUG_PRINT(x) printf x
+#else
+# define DEBUG_PRINT(x) do {} while (0)
+#endif
+
 
 //Matchlab
 
@@ -10,62 +14,50 @@
 #include <stdlib.h>
 
 typedef enum {A, B, C, T, CMD_ARG, ERROR_ARG } arg_type;
+typedef enum {A_, B_, C_, A_T, B_T, C_T, ERR_CMD} cmd_type;
+
 
 void basicPrint(char arr[]);
-arg_type identifyArgType(char* cmdArg);
+void printArr(char* arr[]);
+int arrLen(char arr[], unsigned int typeSize);
 
-int detectChar(char x, char arr[]);
+arg_type identifyArgType(char* cmdArg);
+int detectChar(char x, char arr[], int resultArr[]);
 int compareChar(char lhs, char rhs);
 
+void matchA(char arr[], int numStr, int hasT_Flag);
+void matchB(char arr[], int numStr, int hasT_Flag);
+void matchC(char arr[], int numStr, int hasT_Flag);
+
+int detectUppercase(char*);
+cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[] );
+void reverse(char* in, char* out);
+
+void add_X_after_Y(char* in, char* out);
+int isEven(char a);
+
+
+//Global variables
+int debugOn = 1;
 
 int main(int argc, char* argv[])
 {
 
-	/// Check number of Flag arguments
+		DEBUG_PRINT(("Entered Main"));
 
-		/*
-	
-		- 45
-		a 97
-		b 98
-		c 99
-		t 116
+		cmd_type command = identifyCMD_Type(argc, argv);
 
-
-
-		*/
-		int i;
-		for(i = 1; i < argc; i++)
+		switch(command)
 		{
-			fprintf(stderr, "Wow");
-			arg_type ID = identifyArgType(argv[i]);
-			if(ID == A)
-			{
-				fprintf(stderr, "A\n");
-
-
-			}else if(ID == B)
-			{
-				fprintf(stderr, "B\n");
-
-			}else if(ID == C)
-			{
-				fprintf(stderr, "C\n");
-
-			}else if(ID == T)
-			{
-
-				fprintf(stderr, "T\n");
-			}else if(ID == CMD_ARG)
-			{
-				fprintf(stderr, "CMD_ARG\n");
-			}else
-			{
-				fprintf(stderr, "Error\n");
-			}
-
-
+			case A_: 		matchA(argv[2], argc, 0); 	break;
+			case B_: 		matchB(argv[2], argc, 0);	break;
+			case C_: 		matchC(argv[2], argc, 0); 	break;
+			case A_T: 		matchA(argv[3], argc, 1); 	break;
+			case B_T: 		matchB(argv[3], argc, 1); 	break;
+			case C_T: 		matchC(argv[3], argc, 1); 	break;
+			case ERR_CMD: 								break;
 		}
+
 
 		return 0;
 }
@@ -118,20 +110,22 @@ arg_type identifyArgType(char* cmdArg)
 }
 
 
-
 int detectChar(char x, char arr[], int resultArr[])
 {
 	char* char1;
 	int counter = 0;
 	int numMatches = 0;
 
-	for(char1 = arr; char1 != "\0"; char1++)
+	for(char1 = arr; char1 != '\0'; char1++)
 	{
 		if(x == *char1)
+
 		resultArr[counter] = numMatches++;
 
-		counter++
+		counter++;
 	}
+
+
 
 	return numMatches;
 }
@@ -154,10 +148,21 @@ void basicPrint(char* arr)
 
 }
 
-int arrLen(char arr[])
+
+void printArr(char* arr[])
+{
+	int i;
+	for(i = 0; i < arrLen(*arr, 8); i++)
+	{
+		printf("%s\n", arr[i]);
+	}
+
+}
+
+int arrLen(char arr[], unsigned int typeSize)
 {
 
-	return sizeof(arr)/8;
+	return sizeof(arr)/typeSize;
 }
 
 
@@ -189,9 +194,94 @@ int arrLen(char arr[])
 
 
 */
-void matchA(char arr[])
+void matchA(char arr[], int numStr, int hasT_Flag)
 {
-	int size = sizeof(arr);
+	if(hasT_Flag == 0)
+	{
+		printf("yes\n");
+		printArr(arr);
+
+	}else
+	{
+
+		printArr(arr);
+
+	}
 
 }
+
+void matchB(char arr[], int numStr, int hasT_Flag)
+{
+	int size = sizeof(arr);	
+
+	if(hasT_Flag == 0)
+	{
+		printf("yes\n");
+		printArr(arr);
+
+	}else
+	{
+
+		printArr(arr);
+
+	}
+}
+
+void matchC(char arr[], int numStr, int hasT_Flag)
+{
+
+	if(hasT_Flag == 0)
+	{
+		printf("yes\n");
+		printArr(arr);
+
+	}else
+	{
+
+		printArr(arr);
+
+	}
+}
+
+cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[])
+{
+	if(numOfArgs == 1)
+		return ERR_CMD;
+
+
+	arg_type arg2 = identifyArgType(arrOfArgs[2]);
+	arg_type arg1 = identifyArgType(arrOfArgs[1]);
+
+		switch(arg1)
+		{
+			case A: return arg1 == T? A_T: arg1 == CMD_ARG? A_: ERR_CMD;
+			case B: return arg1 == T? B_T: arg1 == CMD_ARG? B_: ERR_CMD;
+			case C: return arg1 == T? C_T: arg1 == CMD_ARG? C_: ERR_CMD;
+			case T: return arg1 == A? A_T: arg1 == B ? B_T: arg1 == C ? C_T: ERR_CMD;
+			case CMD_ARG: return A_;
+			case ERROR_ARG: return ERR_CMD;
+		}
+
+	return A_;
+}
+
+
+void reverse(char* in, char* out)
+{
+
+
+}
+
+void add_X_after_Y(char* in, char* out)
+{
+
+
+}
+
+int isEven(char a)
+{
+
+	return 1;
+}
+
 
