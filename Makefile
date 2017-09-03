@@ -1,2 +1,2 @@
 match: matchlab.c
-	gcc -O2 -g -Wall matchlab.c
+	gcc -g -Wall matchlab.c

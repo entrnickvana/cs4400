@@ -18,16 +18,20 @@ typedef enum {A_, B_, C_, A_T, B_T, C_T, ERR_CMD} cmd_type;
 
 
 void basicPrint(char arr[]);
-void printArr(char* arr[]);
-int arrLen(char arr[], unsigned int typeSize);
+void printArr(char* arr[], int sizeOfArr);
+int arrLen(char arr[], int typeSize);
+int arrLenPtr(char* arr[]);
+int strLength(char* arr);
+int matchA_Arg(char arr[]);
+int matchRange(char x[], int rangeLength, char strToCmpr[]);
 
 arg_type identifyArgType(char* cmdArg);
 int detectChar(char x, char arr[], int resultArr[]);
 int compareChar(char lhs, char rhs);
 
-void matchA(char arr[], int numStr, int hasT_Flag);
-void matchB(char arr[], int numStr, int hasT_Flag);
-void matchC(char arr[], int numStr, int hasT_Flag);
+void matchA(char* arr[], int numStr, int hasT_Flag);
+void matchB(char* arr[], int numStr, int hasT_Flag);
+void matchC(char* arr[], int numStr, int hasT_Flag);
 
 int detectUppercase(char*);
 cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[] );
@@ -43,18 +47,30 @@ int debugOn = 1;
 int main(int argc, char* argv[])
 {
 
-		DEBUG_PRINT(("Entered Main"));
+		DEBUG_PRINT(("Entered Main\n"));
+
+		//range test
+
+		/*
+		int a1 = 2;
+		int b2 = 3;
+		int c3 = 4;
+		int* arrOfPtr[3] = {&a1, &b2, &c3};
+*/
+
+		//printf("The size of type char* arrOfPtr = %d\n", (int)sizeof(arrOfPtr)/( (int)sizeof(int*)));
+		//printf(" the size of a char is %d\n", (int) sizeof(int*));
 
 		cmd_type command = identifyCMD_Type(argc, argv);
 
 		switch(command)
 		{
-			case A_: 		matchA(argv[2], argc, 0); 	break;
-			case B_: 		matchB(argv[2], argc, 0);	break;
-			case C_: 		matchC(argv[2], argc, 0); 	break;
-			case A_T: 		matchA(argv[3], argc, 1); 	break;
-			case B_T: 		matchB(argv[3], argc, 1); 	break;
-			case C_T: 		matchC(argv[3], argc, 1); 	break;
+			case A_: 		matchA(argv, argc, 0); 	break;
+			case B_: 		matchB(argv, argc, 0);	break;
+			case C_: 		matchC(argv, argc, 0); 	break;
+			case A_T: 		matchA(argv, argc, 1); 	break;
+			case B_T: 		matchB(argv, argc, 1); 	break;
+			case C_T: 		matchC(argv, argc, 1); 	break;
 			case ERR_CMD: 								break;
 		}
 
@@ -125,6 +141,8 @@ int detectChar(char x, char arr[], int resultArr[])
 		counter++;
 	}
 
+	resultArr[0] = numMatches;
+
 
 
 	return numMatches;
@@ -149,21 +167,40 @@ void basicPrint(char* arr)
 }
 
 
-void printArr(char* arr[])
+void printArr(char* arr[], int sizeOfArr)
 {
 	int i;
-	for(i = 0; i < arrLen(*arr, 8); i++)
+
+	for(i = 0; i < sizeOfArr; i++)
 	{
 		printf("%s\n", arr[i]);
 	}
 
 }
 
-int arrLen(char arr[], unsigned int typeSize)
+/*
+
+void printLength(int intArray[])
+{
+    printf("Length of parameter: %d\n", (int)( sizeof(intArray) / sizeof(intArray[0]) ));
+}
+
+*/
+
+
+int arrLen(char arr[], int typeSize)
 {
 
-	return sizeof(arr)/typeSize;
+	return (int)(sizeof(arr))/typeSize;
 }
+
+int arrLenPtr(char* arr[])
+{
+
+	return (int)(sizeof(arr))/(int)sizeof(char*);
+}
+
+
 
 
 /*
@@ -194,51 +231,160 @@ int arrLen(char arr[], unsigned int typeSize)
 
 
 */
-void matchA(char arr[], int numStr, int hasT_Flag)
+void matchA(char* arr[], int numStr, int hasT_Flag)
 {
 	if(hasT_Flag == 0)
 	{
-		printf("yes\n");
-		printArr(arr);
+		DEBUG_PRINT(("Type A_\n"));
+		printArr(arr, numStr);
+
+		int i;
+		for(i = 2; i < numStr; i++)
+		{
+			if(! (matchA_Arg(arr[i])))
+				return;
+
+			printf("yes\n");
+		}
+
+
+
 
 	}else
 	{
+		DEBUG_PRINT(("Type A_T\n"));
+		printArr(arr, numStr);
 
-		printArr(arr);
+		int i;
+		for(i = 3; i < numStr; i++)
+		{
+			if(! (matchA_Arg(arr[i])))
+				return;
+
+			printf("yesT\n");
+		}
+
+
 
 	}
 
 }
 
-void matchB(char arr[], int numStr, int hasT_Flag)
+int matchA_Arg(char arr[])
+{
+	
+	// check for 4 or 5 g's
+	int check5 = matchRange("ggggg", 5, arr);
+	int check4 = matchRange("gggg", 4, arr);
+
+	if(!(check4 || check5))
+		return 0;
+	
+// int detectChar(char x, char arr[], int resultArr[]);
+	int len = strLength(arr) - 1;
+
+	int resultArr[len];
+
+	int result = detectChar('z', arr, resultArr);
+
+	int mask = 1;
+
+// odd number of z's
+	if((result & mask) == 1)
+		return 0;
+
+	int underTestArr[len];
+	result = detectChar('_', arr, underTestArr);
+
+	if(result != 1)
+		return 0;
+
+	int equalTestArr[len];
+	result = detectChar('=', arr, equalTestArr);
+
+	if(result != 1)
+		return 0;
+
+
+	return 1;
+
+
+}
+
+int matchRange(char x[], int rangeLength, char strToCmpr[])
+{
+	int itr;
+
+
+	int xlength = strLength(x) - 1;
+
+	int strLen = strLength(strToCmpr) - 1;
+
+	int matches = 0;
+	int nonMatches = 0;
+
+	if(strLen < rangeLength)
+		return 0;
+
+	for(itr = 0; itr < (strLen - rangeLength); itr++)
+	{
+		switch(rangeLength)
+		{
+			case 10: strToCmpr[9 + itr] == x[9] ? matches++:nonMatches++;
+			case  9: strToCmpr[8 + itr] == x[8] ? matches++:nonMatches++;
+			case  8: strToCmpr[7 + itr] == x[7] ? matches++:nonMatches++;
+			case  7: strToCmpr[6 + itr] == x[6] ? matches++:nonMatches++;
+			case  6: strToCmpr[5 + itr] == x[5] ? matches++:nonMatches++;
+			case  5: strToCmpr[4 + itr] == x[4] ? matches++:nonMatches++;
+			case  4: strToCmpr[3 + itr] == x[3] ? matches++:nonMatches++;
+			case  3: strToCmpr[2 + itr] == x[2] ? matches++:nonMatches++;
+			case  2: strToCmpr[1 + itr] == x[1] ? matches++:nonMatches++;
+			case  1: strToCmpr[0 + itr] == x[0] ? matches++:nonMatches++;
+
+		}
+
+		if(matches == rangeLength)
+			return 1;
+
+		matches = 0; nonMatches = 0;
+
+	}
+
+	return 0;
+
+}
+
+void matchB(char* arr[], int numStr, int hasT_Flag)
 {
 	int size = sizeof(arr);	
 
 	if(hasT_Flag == 0)
 	{
+		DEBUG_PRINT(("Type B_\n"));		
 		printf("yes\n");
-		printArr(arr);
+		printArr(arr, numStr);
 
 	}else
 	{
-
-		printArr(arr);
+		DEBUG_PRINT(("Type B_T\n"));
+		printArr(arr, numStr);
 
 	}
 }
 
-void matchC(char arr[], int numStr, int hasT_Flag)
+void matchC(char* arr[], int numStr, int hasT_Flag)
 {
 
 	if(hasT_Flag == 0)
 	{
+		DEBUG_PRINT(("Type C_\n"));
 		printf("yes\n");
-		printArr(arr);
+		printArr(arr, numStr);
 
 	}else
 	{
-
-		printArr(arr);
+		DEBUG_PRINT(("Type C_T\n"));
+		printArr(arr, numStr);
 
 	}
 }
@@ -248,16 +394,15 @@ cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[])
 	if(numOfArgs == 1)
 		return ERR_CMD;
 
-
-	arg_type arg2 = identifyArgType(arrOfArgs[2]);
 	arg_type arg1 = identifyArgType(arrOfArgs[1]);
+	arg_type arg2 = identifyArgType(arrOfArgs[2]);
 
 		switch(arg1)
 		{
-			case A: return arg1 == T? A_T: arg1 == CMD_ARG? A_: ERR_CMD;
-			case B: return arg1 == T? B_T: arg1 == CMD_ARG? B_: ERR_CMD;
-			case C: return arg1 == T? C_T: arg1 == CMD_ARG? C_: ERR_CMD;
-			case T: return arg1 == A? A_T: arg1 == B ? B_T: arg1 == C ? C_T: ERR_CMD;
+			case A: return arg2 == T? A_T: arg2 == CMD_ARG? A_: ERR_CMD;
+			case B: return arg2 == T? B_T: arg2 == CMD_ARG? B_: ERR_CMD;
+			case C: return arg2 == T? C_T: arg2 == CMD_ARG? C_: ERR_CMD;
+			case T: return arg2 == A? A_T: arg2 == B ? B_T: arg2 == C ? C_T: ERR_CMD;
 			case CMD_ARG: return A_;
 			case ERROR_ARG: return ERR_CMD;
 		}
@@ -282,6 +427,23 @@ int isEven(char a)
 {
 
 	return 1;
+}
+
+int strLength(char* arr)
+{
+
+	char* character;
+	character = NULL;
+
+	int counter = 0;
+
+	for(character = arr; *character != '\0'; character++)
+	{
+		counter++;
+	}
+
+	return counter;
+
 }
 
 
