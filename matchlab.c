@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 
 		char myChars[] = "aaZw12__1837__2w";
 
-		if(matchRangeOfType(UPPER, 7, argv[2]) == 1)
+		if(matchRangeOfType(UPPER, 2, argv[2]) == 1)
 			DEBUG_PRINT(("%s is a match for 4 DEC\n", argv[2]));
 
 		/*
@@ -347,6 +347,10 @@ int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
 {
 	
 	int itr;
+	int matchDetected = 0;
+	int matchCount = 0;
+	int current = 0;
+	int invCount = 0;
 	int strLen = strLength(strToCmpr) - 1;
 
 	ascii_type x[strLen];
@@ -382,14 +386,23 @@ int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
 
 		}
 
-		if(matches == rangeLength)
-			return 1;
 
-		matches = 0; nonMatches = 0;
+		if(itr > 0 && itr < (strLen - rangeLength) - 1)
+		{
+			if( detectAsciiType(strToCmpr[0 + itr - 1]) != X
+			   	&& detectAsciiType(strToCmpr[rangeLength + itr + 1]) != X
+	    	  )
+			{
+				if(matches == rangeLength)
+					return 1;
+			}
+
+		}
+						
 
 	}
 
-	return 0;
+	return (matchCount - invCount) > 0;
 
 }
 
@@ -434,8 +447,6 @@ int matchRange(char x[], int rangeLength, char strToCmpr[])
 	}
 
 	return 0;
-
-
 
 }
 
