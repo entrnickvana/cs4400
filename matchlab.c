@@ -15,6 +15,7 @@
 
 typedef enum {A, B, C, T, CMD_ARG, ERROR_ARG } arg_type;
 typedef enum {A_, B_, C_, A_T, B_T, C_T, ERR_CMD} cmd_type;
+typedef enum {UPPER, DEC, LOWER, OTHER_ASCII} ascii_type;
 
 
 void basicPrint(char arr[]);
@@ -24,6 +25,7 @@ int arrLenPtr(char* arr[]);
 int strLength(char* arr);
 int matchA_Arg(char arr[]);
 int matchRange(char x[], int rangeLength, char strToCmpr[]);
+int matchRangeOfType( ascii_type x, int rangeLength, char strToCmpr[]);
 
 arg_type identifyArgType(char* cmdArg);
 int detectChar(char x, char arr[], int resultArr[]);
@@ -33,7 +35,7 @@ void matchA(char* arr[], int numStr, int hasT_Flag);
 void matchB(char* arr[], int numStr, int hasT_Flag);
 void matchC(char* arr[], int numStr, int hasT_Flag);
 
-int detectUppercase(char*);
+ascii_type detectAsciiType(char x);
 cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[] );
 void reverse(char* in, char* out);
 
@@ -49,8 +51,42 @@ int main(int argc, char* argv[])
 
 		DEBUG_PRINT(("Entered Main\n"));
 
+		char myChars[] = "aaZw12__1837__2w";
+
+		if(matchRangeOfType(UPPER, 7, argv[2]) == 1)
+			DEBUG_PRINT(("%s is a match for 4 DEC\n", argv[2]));
+
+		/*
+		if(detectAsciiType('1') == DEC)
+		{
+			DEBUG_PRINT(("Correct\n"));
+		}
+
+		if(detectAsciiType('A') == UPPER)
+			DEBUG_PRINT(("A is an Upper\n"));
+
+		if(detectAsciiType('z') == LOWER)
+			DEBUG_PRINT(("z is a LOWER\n"));
+
+		if(detectAsciiType('.') == OTHER_ASCII)
+			DEBUG_PRINT((". is a OTHER_ASCII\n"));
+		*/
+
+
+		/*
+		char charArr[] = "Billy Bob";
+
+		int l = strLength(charArr) - 1;
+		int myArr[l];
+
+		int result1 = detectChar('y', charArr, myArr);
+
+		printf("%d\n", result1 );
+		*/
+
 		//range test
 
+		
 		/*
 		int a1 = 2;
 		int b2 = 3;
@@ -84,7 +120,6 @@ int main(int argc, char* argv[])
 */
 arg_type identifyArgType(char* cmdArg)
 {
-
 
 	if(cmdArg[0] == '\0')
 	{
@@ -128,14 +163,13 @@ arg_type identifyArgType(char* cmdArg)
 
 int detectChar(char x, char arr[], int resultArr[])
 {
-	char* char1;
 	int counter = 0;
 	int numMatches = 0;
 
-	for(char1 = arr; char1 != '\0'; char1++)
+	int i;
+	for(i = 0; arr[i] != '\0'; i++)
 	{
-		if(x == *char1)
-
+		if(x == arr[i])
 		resultArr[counter] = numMatches++;
 
 		counter++;
@@ -156,7 +190,7 @@ void basicPrint(char* arr)
 	character = NULL;
 
 
-	for(character = arr; *character != '\0'; character++)
+	for(character = arr; *character != 0; character++)
 	{
 		printf("%c", *character);
 	}
@@ -290,7 +324,7 @@ int matchA_Arg(char arr[])
 	int mask = 1;
 
 // odd number of z's
-	if((result & mask) == 1)
+	if((result & mask) != 1)
 		return 0;
 
 	int underTestArr[len];
@@ -305,11 +339,60 @@ int matchA_Arg(char arr[])
 	if(result != 1)
 		return 0;
 
-
 	return 1;
 
+}
+
+int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
+{
+	
+	int itr;
+	int strLen = strLength(strToCmpr) - 1;
+
+	ascii_type x[strLen];
+
+	int k;
+	for(k = 0; k < strLen; k++)
+	{
+		x[k] = X;
+	}
+
+
+
+	int matches = 0;
+	int nonMatches = 0;
+
+	if(strLen < rangeLength)
+		return 0;
+
+	for(itr = 0; itr < (strLen - rangeLength); itr++)
+	{
+		switch(rangeLength)
+		{
+			case 10: detectAsciiType(strToCmpr[9 + itr]) == x[9] ? matches++:nonMatches++;
+			case  9: detectAsciiType(strToCmpr[8 + itr]) == x[8] ? matches++:nonMatches++;
+			case  8: detectAsciiType(strToCmpr[7 + itr]) == x[7] ? matches++:nonMatches++;
+			case  7: detectAsciiType(strToCmpr[6 + itr]) == x[6] ? matches++:nonMatches++;
+			case  6: detectAsciiType(strToCmpr[5 + itr]) == x[5] ? matches++:nonMatches++;
+			case  5: detectAsciiType(strToCmpr[4 + itr]) == x[4] ? matches++:nonMatches++;
+			case  4: detectAsciiType(strToCmpr[3 + itr]) == x[3] ? matches++:nonMatches++;
+			case  3: detectAsciiType(strToCmpr[2 + itr]) == x[2] ? matches++:nonMatches++;
+			case  2: detectAsciiType(strToCmpr[1 + itr]) == x[1] ? matches++:nonMatches++;
+			case  1: detectAsciiType(strToCmpr[0 + itr]) == x[0] ? matches++:nonMatches++;
+
+		}
+
+		if(matches == rangeLength)
+			return 1;
+
+		matches = 0; nonMatches = 0;
+
+	}
+
+	return 0;
 
 }
+
 
 int matchRange(char x[], int rangeLength, char strToCmpr[])
 {
@@ -351,6 +434,8 @@ int matchRange(char x[], int rangeLength, char strToCmpr[])
 	}
 
 	return 0;
+
+
 
 }
 
@@ -421,6 +506,29 @@ void add_X_after_Y(char* in, char* out)
 {
 
 
+}
+
+ascii_type detectAsciiType(char x)
+{
+
+	if(	x == 'A' || x == 'B' || x == 'C' || x == 'D' || x == 'E' || x == 'F' || x == 'G' || x == 'H' ||
+	   	x == 'I' || x == 'J' || x == 'K' || x == 'L' || x == 'M' || x == 'N' || x == 'O' || x == 'P' ||
+		x == 'Q' || x == 'R' || x == 'S' || x == 'T' || x == 'U' || x == 'V' || x == 'W' || x == 'X' ||
+		x == 'Y' || x == 'Z'
+	  ) return UPPER;
+
+
+	if(	x == 'a' || x == 'b' || x == 'c' || x == 'c' || x == 'e' || x == 'f' || x == 'g' || x == 'h' ||
+	   	x == 'i' || x == 'j' || x == 'k' || x == 'l' || x == 'm' || x == 'n' || x == 'o' || x == 'p' ||
+		x == 'q' || x == 'r' || x == 's' || x == 't' || x == 'u' || x == 'v' || x == 'w' || x == 'x' ||
+		x == 'y' || x == 'z'
+	  ) return LOWER;
+
+	if(	x == '1' || x == '2' || x == '3' || x == '4' || x == '5' || x == '6' || x == '7' || x == '8' ||
+		x == '9'
+	  ) return DEC;
+
+	return OTHER_ASCII;
 }
 
 int isEven(char a)
