@@ -51,10 +51,15 @@ int main(int argc, char* argv[])
 
 		DEBUG_PRINT(("Entered Main\n"));
 
-		char myChars[] = "aaZw12__1837__2w";
 
-		if(matchRangeOfType(UPPER, 2, argv[2]) == 1)
-			DEBUG_PRINT(("%s is a match for 4 DEC\n", argv[2]));
+
+
+
+		if(matchRangeOfType(UPPER, 3, argv[2]) == 1)
+		DEBUG_PRINT(("%s is a match for 4 DEC\n", argv[2]));
+
+
+
 
 		/*
 		if(detectAsciiType('1') == DEC)
@@ -351,14 +356,17 @@ int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
 	int matchCount = 0;
 	int current = 0;
 	int invCount = 0;
-	int strLen = strLength(strToCmpr) - 1;
+	int strLen = strLength(strToCmpr);
 
 	ascii_type x[strLen];
 
 	int k;
 	for(k = 0; k < strLen; k++)
 	{
+		if( k < rangeLength)
 		x[k] = X;
+		else
+		x[k] = OTHER_ASCII;
 	}
 
 
@@ -369,7 +377,7 @@ int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
 	if(strLen < rangeLength)
 		return 0;
 
-	for(itr = 0; itr < (strLen - rangeLength); itr++)
+	for(itr = 0; itr < (strLen - rangeLength) + 1; itr++)
 	{
 		switch(rangeLength)
 		{
@@ -386,23 +394,37 @@ int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
 
 		}
 
-
-		if(itr > 0 && itr < (strLen - rangeLength) - 1)
+		// Field is at first iteration, check whether one char past field is not type X
+		if(itr == (strLen - rangeLength) && itr != 0)
 		{
-			if( detectAsciiType(strToCmpr[0 + itr - 1]) != X
-			   	&& detectAsciiType(strToCmpr[rangeLength + itr + 1]) != X
-	    	  )
-			{
-				if(matches == rangeLength)
-					return 1;
-			}
+			if(detectAsciiType(strToCmpr[itr - 1]) != X && matches == rangeLength)
+				return 1;
+
+		}else if( itr != 0 && itr != (strLen - rangeLength))	// Field is in a middle iteration, check whether one before and one after are not type X
+		{
+			if( (detectAsciiType(strToCmpr[rangeLength + 1]) != X) 
+				&& (detectAsciiType(strToCmpr[itr - 1]) != X)  && matches == rangeLength)
+				return 1;
+		}else if( itr == 0 && itr != (strLen - rangeLength))
+		{
+			if(detectAsciiType(strToCmpr[rangeLength]) != X && matches == rangeLength)
+				return 1;
+		}
+		else
+		{
+			if(matches == rangeLength)
+				return 1;
 
 		}
+
+		matches = 0; nonMatches = 0;		
+
+		// Field is in last iteration, check whether on char before field is not type X
 						
 
 	}
 
-	return (matchCount - invCount) > 0;
+	return 0;
 
 }
 
