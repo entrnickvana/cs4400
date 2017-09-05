@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 
 
 
-		if(matchRangeOfType(UPPER, 3, argv[2]) == 1)
+		if(matchRange("abc", 3, argv[2]) == 1)
 		DEBUG_PRINT(("%s is a match for 4 DEC\n", argv[2]));
 
 
