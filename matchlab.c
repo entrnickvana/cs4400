@@ -432,7 +432,7 @@ int detectChar(char x, char arr[], int resultArr[])
 int matchB_Arg(char arr[])
 {
 
-	// any even number (including zero) repetitions of the letter “m”;
+	// any even number (including zero) repetitions of the letter “m” ///////////////////////
 	int length_of_string = strLength(arr);
 
 	int resultArr[length_of_string];
@@ -446,8 +446,37 @@ int matchB_Arg(char arr[])
 		return 0;
 	}
 
-	// exactly one “:”;
-	
+	//	an odd number of uppercase letters — call this sequence X ////////////////////////////
+	int resultArr2;
+
+	int i;
+
+//	for(i = 1; matchRangeOfType(UPPER, i, arr) == 0
+
+	// exactly one : /////////////////////////////////////////////////////////////////////////
+
+	int resultArr3[length_of_string];
+
+	int result3 = detectChar('=', arr, resultArr3);
+
+	if(result3 != 1)
+	{
+		DEBUG_PRINT(("B: Failed = test\n"));
+		return 0;
+	}
+
+	// 1 or more repetitions of the letter “r”  //////////////////////////////////////////////////
+
+	int resultArr4[length_of_string];
+
+	int result4 = detectChar('r', arr, resultArr4);
+
+	if(result4 >= 1)
+	{
+		DEBUG_PRINT(("B: Failed r test\n"));
+		return 0;
+	}
+
 
 
 	return 1;
@@ -458,37 +487,37 @@ void matchC(char* arr[], int numStr, int hasT_Flag)
 {
 
 	
-if(hasT_Flag == 0)
-	{
-		DEBUG_PRINT(("Type C_\n"));
-		printArr(arr, numStr);
-
-		int i;
-		for(i = 2; i < numStr; i++)
+	if(hasT_Flag == 0)
 		{
-			if(! (matchC_Arg(arr[i])))
-				return;
+			DEBUG_PRINT(("Type C_\n"));
+			printArr(arr, numStr);
 
-			printf("yes\n");
-		}
+			int i;
+			for(i = 2; i < numStr; i++)
+			{
+				if(! (matchC_Arg(arr[i])))
+					return;
 
-	}else
-	{
-		DEBUG_PRINT(("Type C_T\n"));
-		printArr(arr, numStr);
+				printf("yes\n");
+			}
 
-		int i;
-		for(i = 3; i < numStr; i++)
+		}else
 		{
-			if(! (matchC_Arg(arr[i])))
-				return;
+			DEBUG_PRINT(("Type C_T\n"));
+			printArr(arr, numStr);
 
-			printf("yesT\n");
+			int i;
+			for(i = 3; i < numStr; i++)
+			{
+				if(! (matchC_Arg(arr[i])))
+					return;
+
+				printf("yesT\n");
+			}
+
+
+
 		}
-
-
-
-	}
 	
 }
 
