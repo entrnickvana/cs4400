@@ -51,11 +51,14 @@ int main(int argc, char* argv[])
 
 		DEBUG_PRINT(("Entered Main\n"));
 
+		int x1 = strLength(argv[2]);
+		int x2 =  strLength(argv[3]);
+		printf("Length of arg1 = %d", x1); 
+		printf("%s\n");
+		printf("Length of arg2 = %d", x2);
+		printf("%s\n");
 
-
-
-
-		if(matchRange("abc", 3, argv[2]) == 1)
+		if(matchRange(argv[3], 3, argv[2]) == 1)
 		DEBUG_PRINT(("%s is a match for 4 DEC\n", argv[2]));
 
 
@@ -352,10 +355,6 @@ int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
 {
 	
 	int itr;
-	int matchDetected = 0;
-	int matchCount = 0;
-	int current = 0;
-	int invCount = 0;
 	int strLen = strLength(strToCmpr);
 
 	ascii_type x[strLen];
@@ -433,9 +432,6 @@ int matchRange(char x[], int rangeLength, char strToCmpr[])
 {
 	int itr;
 
-
-	int xlength = strLength(x) - 1;
-
 	int strLen = strLength(strToCmpr) - 1;
 
 	int matches = 0;
@@ -474,7 +470,7 @@ int matchRange(char x[], int rangeLength, char strToCmpr[])
 
 void matchB(char* arr[], int numStr, int hasT_Flag)
 {
-	int size = sizeof(arr);	
+
 
 	if(hasT_Flag == 0)
 	{
@@ -574,7 +570,6 @@ int strLength(char* arr)
 {
 
 	char* character;
-	character = NULL;
 
 	int counter = 0;
 
