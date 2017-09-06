@@ -23,7 +23,6 @@ void printArr(char* arr[], int sizeOfArr);
 int arrLen(char arr[], int typeSize);
 int arrLenPtr(char* arr[]);
 int strLength(char* arr);
-int matchA_Arg(char arr[]);
 int matchRange(char x[], int rangeLength, char strToCmpr[]);
 int matchRangeOfType( ascii_type x, int rangeLength, char strToCmpr[]);
 
@@ -32,8 +31,11 @@ int detectChar(char x, char arr[], int resultArr[]);
 int compareChar(char lhs, char rhs);
 
 void matchA(char* arr[], int numStr, int hasT_Flag);
+int matchA_Arg(char arr[]);
 void matchB(char* arr[], int numStr, int hasT_Flag);
+int matchB_Arg(char arr[]);
 void matchC(char* arr[], int numStr, int hasT_Flag);
+int matchC_Arg(char arr[]);
 
 ascii_type detectAsciiType(char x);
 cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[] );
@@ -41,6 +43,7 @@ void reverse(char* in, char* out);
 
 void add_X_after_Y(char* in, char* out);
 int isEven(char a);
+int isEvenNum(int a);
 
 
 //Global variables
@@ -51,15 +54,29 @@ int main(int argc, char* argv[])
 
 		DEBUG_PRINT(("Entered Main\n"));
 
+
+		/* DEBUG matchRange
 		int x1 = strLength(argv[2]);
 		int x2 =  strLength(argv[3]);
 		printf("Length of arg1 = %d", x1); 
-		printf("%s\n");
+		printf("\n");
 		printf("Length of arg2 = %d", x2);
-		printf("%s\n");
+		printf("\n");
 
-		if(matchRange(argv[3], 3, argv[2]) == 1)
+		if(matchRange(argv[3], 4, argv[2]) == 1)
 		DEBUG_PRINT(("%s is a match for 4 DEC\n", argv[2]));
+		*/
+
+		/* Debug evenOdd
+		int j;
+		for(j = 4; j < 1000; j = (j+7)*3)
+		if(isEvenNum(j) == 1)
+		DEBUG_PRINT(("J = %d is Even\n ", j));
+		else
+		DEBUG_PRINT(("Arg %d Odd\n ", j));
+		*/
+	
+	
 
 
 
@@ -351,6 +368,138 @@ int matchA_Arg(char arr[])
 
 }
 
+
+
+/*
+any even number (including zero) repetitions of the letter “m”;
+exactly one “:”;
+an odd number of uppercase letters — call this sequence X;
+1 or more repetitions of the letter “r”;
+exactly one “:”;
+the same characters as the even-positioned characters in X; and
+between 1 and 3 (inclusive) decimal digits.
+*/
+void matchB(char* arr[], int numStr, int hasT_Flag)
+{
+
+
+if(hasT_Flag == 0)
+	{
+		DEBUG_PRINT(("Type B_\n"));
+		printArr(arr, numStr);
+
+		int i;
+		for(i = 2; i < numStr; i++)
+		{
+			if(! (matchB_Arg(arr[i])))
+				return;
+
+			printf("yes\n");
+		}
+
+	}else
+	{
+		DEBUG_PRINT(("Type B_T\n"));
+		printArr(arr, numStr);
+
+		int i;
+		for(i = 3; i < numStr; i++)
+		{
+			if(! (matchB_Arg(arr[i])))
+				return;
+
+			printf("yesT\n");
+		}
+
+
+
+	}
+}
+
+
+/*
+any even number (including zero) repetitions of the letter “m”;
+exactly one “:”;
+an odd number of uppercase letters — call this sequence X;
+1 or more repetitions of the letter “r”;
+exactly one “:”;
+the same characters as the even-positioned characters in X; and
+between 1 and 3 (inclusive) decimal digits.
+
+int detectChar(char x, char arr[], int resultArr[])
+
+*/
+int matchB_Arg(char arr[])
+{
+
+	// any even number (including zero) repetitions of the letter “m”;
+	int length_of_string = strLength(arr);
+
+	int resultArr[length_of_string];
+
+	int result = detectChar('m', arr, resultArr);
+
+	if(isEvenNum(result) != 1)
+	{
+		DEBUG_PRINT(("B: result = %d\n", result));
+		DEBUG_PRINT(("B: Failed m test\n"));
+		return 0;
+	}
+
+	// exactly one “:”;
+	
+
+
+	return 1;
+	
+}
+
+void matchC(char* arr[], int numStr, int hasT_Flag)
+{
+
+	
+if(hasT_Flag == 0)
+	{
+		DEBUG_PRINT(("Type C_\n"));
+		printArr(arr, numStr);
+
+		int i;
+		for(i = 2; i < numStr; i++)
+		{
+			if(! (matchC_Arg(arr[i])))
+				return;
+
+			printf("yes\n");
+		}
+
+	}else
+	{
+		DEBUG_PRINT(("Type C_T\n"));
+		printArr(arr, numStr);
+
+		int i;
+		for(i = 3; i < numStr; i++)
+		{
+			if(! (matchC_Arg(arr[i])))
+				return;
+
+			printf("yesT\n");
+		}
+
+
+
+	}
+	
+}
+
+int matchC_Arg(char arr[])
+{
+
+	return 0;
+}
+
+
+
 int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
 {
 	
@@ -468,40 +617,6 @@ int matchRange(char x[], int rangeLength, char strToCmpr[])
 
 }
 
-void matchB(char* arr[], int numStr, int hasT_Flag)
-{
-
-
-	if(hasT_Flag == 0)
-	{
-		DEBUG_PRINT(("Type B_\n"));		
-		printf("yes\n");
-		printArr(arr, numStr);
-
-	}else
-	{
-		DEBUG_PRINT(("Type B_T\n"));
-		printArr(arr, numStr);
-
-	}
-}
-
-void matchC(char* arr[], int numStr, int hasT_Flag)
-{
-
-	if(hasT_Flag == 0)
-	{
-		DEBUG_PRINT(("Type C_\n"));
-		printf("yes\n");
-		printArr(arr, numStr);
-
-	}else
-	{
-		DEBUG_PRINT(("Type C_T\n"));
-		printArr(arr, numStr);
-
-	}
-}
 
 cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[])
 {
@@ -579,6 +694,17 @@ int strLength(char* arr)
 	}
 
 	return counter;
+
+}
+
+int isEvenNum(int a)
+{
+	unsigned int mask = 1;
+
+	if( (mask & ((unsigned int)a)) == 1)
+		return 0;
+
+	return 1;
 
 }
 
