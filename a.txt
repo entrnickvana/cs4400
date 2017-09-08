@@ -1,0 +1,1 @@
+./a.out -a gggg=z_185 gggg=z_552 gggg=z_838 gggg=zzzzz_533 gggg=zzzzzzzzz_969 gggg=zzzzzzzzz_649 gggg=zzz_425  gggg=zzzzzzz_621  gggg=z_26 gggg=zzz_919 > aT.txt

@@ -136,6 +136,7 @@ int main(int argc, char* argv[])
 		}
 
 
+
 		return 0;
 }
 
@@ -304,7 +305,9 @@ void matchA(char* arr[], int numStr, int hasT_Flag)
 			{
 
 			printf("yes\n");
+				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
+
 			}
 		}
 
@@ -323,6 +326,7 @@ void matchA(char* arr[], int numStr, int hasT_Flag)
 			{		
 
 			printf("yesT\n");
+				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 			}
 		}
@@ -337,10 +341,15 @@ int matchA_Arg(char arr[])
 {
 	
 	// check for 4 or 5 g's
-	int check5 = matchRange("ggggg", 5, arr);
-	int check4 = matchRange("gggg", 4, arr);
+	int check5 = 0;
+	int check4 = 0;
 
-	if((check5 == 0 || check4 == 0))
+	check4 = matchRange("gggg", 4, arr);
+	check5 = matchRange("ggggg", 5, arr);
+
+	printf("Check 4 = %d, Check 5 = %d\n",check4, check5);
+
+	if((check5 == 0 && check4 == 0))
 	{
 		DEBUG_PRINT(("Failed g test, check5 = %d, check 4 = %d\n", check5, check4));
 
@@ -421,6 +430,7 @@ if(hasT_Flag == 0)
 			{
 
 			printf("yes\n");
+				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 
 			}
@@ -439,6 +449,7 @@ if(hasT_Flag == 0)
 			{	
 
 			printf("yesT\n");
+				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 			}
 		}
@@ -625,6 +636,7 @@ void matchC(char* arr[], int numStr, int hasT_Flag)
 				{
 
 				printf("yes\n");
+				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 				}
 
@@ -643,6 +655,7 @@ void matchC(char* arr[], int numStr, int hasT_Flag)
 				{
 
 				printf("yesT\n");
+				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 				}
 			}
@@ -894,7 +907,7 @@ int matchRangeOfType( ascii_type X, int rangeLength, char strToCmpr[])
 
 	}
 
-	return 0;
+	return -1;
 
 }
 
@@ -945,7 +958,7 @@ int matchRange(char x[], int rangeLength, char strToCmpr[])
 
 	}
 
-	return 0;
+	return -1;
 
 }
 

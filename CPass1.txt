@@ -1,0 +1,114 @@
+Entered Main
+Type C_
+./a.out
+-c
+iiiiiiiii,Fsss_791FFF
+iiiiiiii,Bsss_148BBB
+iiiiiiii,AEEsss_781AEEAEEAEE
+iiiiii,GDEEGsss_854GDEEGGDEEGGDEEG
+iiiiii,FGGFCsss_391FGGFCFGGFCFGGFC
+iiiiiiii,Bsssssss_219BBB
+iiiiiiii,HBFsssssss_857HBFHBFHBF
+iiiiiiiii,FGCCCsssssss_613FGCCCFGCCCFGCCC
+iiiiii,Hsssss_6HHH
+iiiiii,CFGsssss_302CFGCFGCFG
+C : Length of String 21
+I: 1
+C: i = 21, matchIndex = 10
+ X = Fsss_791FFF
+Length of sequence 3x = 3
+yes
+$$$  iiiiiiiii,Fsss_791FFF
+////////////////////////////////////////
+
+
+C : Length of String 20
+I: 1
+C: i = 19, matchIndex = 9
+ X = Bsss_148BBB
+Length of sequence 3x = 3
+yes
+$$$  iiiiiiii,Bsss_148BBB
+////////////////////////////////////////
+
+
+C : Length of String 28
+I: 1
+C: i = 27, matchIndex = 9
+ X = AEEsss_781AEEAEEAEE
+Length of sequence 3x = 3
+yes
+$$$  iiiiiiii,AEEsss_781AEEAEEAEE
+////////////////////////////////////////
+
+
+C : Length of String 34
+I: 1
+C: i = 33, matchIndex = 7
+ X = GDEEGsss_854GDEEGGDEEGGDEEG
+Length of sequence 3x = 3
+yes
+$$$  iiiiii,GDEEGsss_854GDEEGGDEEGGDEEG
+////////////////////////////////////////
+
+
+C : Length of String 34
+I: 1
+C: i = 33, matchIndex = 7
+ X = FGGFCsss_391FGGFCFGGFCFGGFC
+Length of sequence 3x = 3
+yes
+$$$  iiiiii,FGGFCsss_391FGGFCFGGFCFGGFC
+////////////////////////////////////////
+
+
+C : Length of String 24
+I: 1
+C: i = 23, matchIndex = 9
+ X = Bsssssss_219BBB
+Length of sequence 3x = 3
+yes
+$$$  iiiiiiii,Bsssssss_219BBB
+////////////////////////////////////////
+
+
+C : Length of String 32
+I: 1
+C: i = 31, matchIndex = 9
+ X = HBFsssssss_857HBFHBFHBF
+Length of sequence 3x = 3
+yes
+$$$  iiiiiiii,HBFsssssss_857HBFHBFHBF
+////////////////////////////////////////
+
+
+C : Length of String 41
+I: 1
+C: i = 41, matchIndex = 10
+ X = FGCCCsssssss_613FGCCCFGCCCFGCCC
+Length of sequence 3x = 3
+yes
+$$$  iiiiiiiii,FGCCCsssssss_613FGCCCFGCCCFGCCC
+////////////////////////////////////////
+
+
+C : Length of String 18
+I: 1
+C: i = 17, matchIndex = 7
+ X = Hsssss_6HHH
+Length of sequence 3x = 3
+yes
+$$$  iiiiii,Hsssss_6HHH
+////////////////////////////////////////
+
+
+C : Length of String 28
+I: 1
+C: i = 27, matchIndex = 7
+ X = CFGsssss_302CFGCFGCFG
+Length of sequence 3x = 3
+yes
+$$$  iiiiii,CFGsssss_302CFGCFGCFG
+////////////////////////////////////////
+
+
