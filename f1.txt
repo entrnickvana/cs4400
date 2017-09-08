@@ -1,0 +1,23 @@
+Entered Main
+Type B_
+./a.out
+-b
+mmmm:DBBDBrrrr:DBB703
+Length of String 21
+i = 21, matchIndex = 0
+i = 19, matchIndex = 0
+i = 17, matchIndex = 0
+i = 15, matchIndex = 0
+i = 13, matchIndex = 0
+i = 11, matchIndex = 0
+i = 9, matchIndex = 0
+i = 7, matchIndex = 0
+i = 5, matchIndex = 0
+I: 3
+i = 0, matchIndex = 5
+Length of evens: 1
+The char: B
+yes
+////////////////////////////////////////
+
+

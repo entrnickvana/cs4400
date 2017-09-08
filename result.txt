@@ -1,0 +1,40 @@
+Entered Main
+Type B_
+./a.out
+-b
+mmmmmm:HEGrrr:HG538
+mm:BBArrrrr:BA649
+Length of String 19
+i = 19, matchIndex = 0
+i = 17, matchIndex = 0
+i = 15, matchIndex = 0
+i = 13, matchIndex = 0
+i = 11, matchIndex = 0
+i = 9, matchIndex = 0
+i = 7, matchIndex = 0
+i = 5, matchIndex = 0
+I: 3
+i = 0, matchIndex = 7
+Length of evens: 1
+The char: E
+yes
+////////////////////////////////////////
+
+
+Length of String 17
+i = 17, matchIndex = 0
+i = 15, matchIndex = 0
+i = 13, matchIndex = 0
+i = 11, matchIndex = 0
+i = 9, matchIndex = 0
+i = 7, matchIndex = 0
+i = 5, matchIndex = 0
+i = 3, matchIndex = 0
+I: 1
+i = 0, matchIndex = 3
+Length of evens: 0
+B: Failed Evense test
+B: MatchIndex 3
+Range length = 1
+Evanes string = mm:BBArrrrr:BA649
+Evanes string = 
