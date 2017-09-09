@@ -45,6 +45,8 @@ void add_X_after_Y(char* in, char* out);
 int isEven(char a);
 int isEvenNum(int a);
 int includedChars(char included[], int Upper, int Lower, int Dec, char arr[]);
+void printC(char arr[]);
+void printB(char arr[]);
 
 //Global variables
 int debugOn = 1;
@@ -67,8 +69,6 @@ int main(int argc, char* argv[])
 			case C_T: 		matchC(argv, argc, 1); 	break;
 			case ERR_CMD: 								break;
 		}
-
-
 
 		return 0;
 }
@@ -151,11 +151,11 @@ void basicPrint(char* arr)
 
 	for(character = arr; *character != 0; character++)
 	{
-		printf("%c", *character);
+		DEBUG_PRINT(("%c", *character));
 	}
 
 
-	printf("\n");
+	DEBUG_PRINT(("\n"));
 
 }
 
@@ -166,8 +166,10 @@ void printArr(char* arr[], int sizeOfArr)
 
 	for(i = 0; i < sizeOfArr; i++)
 	{
-		printf("%s\n", arr[i]);
+		DEBUG_PRINT(("%s\n", arr[i]));
 	}
+
+	DEBUG_PRINT(("\n\n\n"));
 
 }
 
@@ -196,34 +198,6 @@ int arrLenPtr(char* arr[])
 
 
 
-/*
-
-	-a mode
-	Match a sequence of the following, with nothing else before, after, or in between:
-	between 4 and 5 repetitions (inclusive) of the letter “g”;
-	exactly one “=”;
-	any odd number of repetitions of the letter “z”;
-	exactly one “_”; and
-	between 1 and 3 (inclusive) decimal digits.
-	For matches, perform the following conversion:
-	reverse all of the characters.
-	http://crystalis.cs.utah.edu:5577/assignment?uid=u0682219
-	1/58/21/2017
-	Match Assignment for u0682219
-	Example arguments that match, followed by their conversions:
-	gggg=z_185
-	→ 581_z=gggg
-	gggg=z_552
-	→ 255_z=gggg
-	gggg=z_838
-	→ 838_z=gggg
-	gggg=zzzzz_533
-	→ 335_zzzzz=gggg
-	gggg=zzzzzzzzz_969
-	→ 969_zzzzzzzzz=gggg
-
-
-*/
 void matchA(char* arr[], int numStr, int hasT_Flag)
 {
 	if(hasT_Flag == 0)
@@ -231,13 +205,14 @@ void matchA(char* arr[], int numStr, int hasT_Flag)
 		DEBUG_PRINT(("Type A_\n"));
 		printArr(arr, numStr);
 
+
 		int i;
 		for(i = 2; i < numStr; i++)
 		{
 			if((matchA_Arg(arr[i])))
 			{
 
-			printf("yes\n");
+				printf("yes\n");
 				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 
@@ -258,7 +233,7 @@ void matchA(char* arr[], int numStr, int hasT_Flag)
 			if((matchA_Arg(arr[i])))
 			{		
 
-			printf("yesT\n");
+				reverse(arr[i]);
 				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 			}
@@ -283,7 +258,7 @@ int matchA_Arg(char arr[])
 	if((check5 == 0 && check4 == 0))
 	{
 		DEBUG_PRINT(("Failed g test, check5 = %d, check 4 = %d\n", check5, check4));
-
+		return 0;
 	}
 	
 // int detectChar(char x, char arr[], int resultArr[]);
@@ -299,7 +274,7 @@ int matchA_Arg(char arr[])
 	if((result & mask) != 1)
 	{
 		DEBUG_PRINT(("Failed z test\n"));
-
+		return 0;
 	}
 
 	int underTestArr[len];
@@ -308,7 +283,7 @@ int matchA_Arg(char arr[])
 	if(result != 1)
 	{
 		DEBUG_PRINT(("Failed _ test\n"));
-
+		return 0;
 	}
 
 	int equalTestArr[len];
@@ -317,7 +292,7 @@ int matchA_Arg(char arr[])
 	if(result != 1)
 	{
 		DEBUG_PRINT(("Failed = test\n"));
-
+		return 0;
 	}
 
 	int resultArr5[len];
@@ -328,11 +303,13 @@ int matchA_Arg(char arr[])
 	if(result5 == 0 || result6 == 0 || result7 == 0)
 	{
 		DEBUG_PRINT(("Failed DEC test\n"));
+		return 0;
 	}
 
 	if(includedChars("g=z_", 1,1,1,arr) <= 0)
 	{
 		DEBUG_PRINT(("A: Failed Exlusion test\n"));
+		return 0;
 	}
 
 	return 1;
@@ -384,7 +361,7 @@ if(hasT_Flag == 0)
 			if((matchB_Arg(arr[i])))
 			{	
 
-			printf("yesT\n");
+				printB(arr[i]);
 				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 			}
@@ -461,6 +438,7 @@ int matchB_Arg(char arr[])
 	{
 		DEBUG_PRINT(("B: Failed X Sequence test\n"));
 		DEBUG_PRINT(("B: X Sequence Match = %d\n", lengthOf_X_Sequence));
+		return 0;		
 	}
 
 
@@ -473,6 +451,7 @@ int matchB_Arg(char arr[])
 	if(result3 != 2)
 	{
 		DEBUG_PRINT(("B: Failed : test\n"));
+		return 0;
 	}
 
 	// 1 or more repetitions of the letter “r”  //////////////////////////////////////////////////
@@ -485,6 +464,7 @@ int matchB_Arg(char arr[])
 	{
 		DEBUG_PRINT(("B: Failed r test\n"));
 		DEBUG_PRINT(("B: result4 = %d\n", result4));
+		return 0;		
 	}
 
 	//  the same characters as the even-positioned characters in X //////////////////////////////////
@@ -530,6 +510,7 @@ int matchB_Arg(char arr[])
 		DEBUG_PRINT(("Range length = %d\n", lengthOfMatch));
 		DEBUG_PRINT(("Evanes string = %s\n", arr));
 		DEBUG_PRINT(("Evanes string = %s\n", evens_Of_X));
+		return 0;		
 	}
 
 	
@@ -545,12 +526,14 @@ int matchB_Arg(char arr[])
 
 		DEBUG_PRINT(("B: Failed 3 digit\n"));	
 		DEBUG_PRINT(("B: 1: %d  2:%d  3: %d digit\n", result5, result6, result7));
+		return 0;
 
 	}
 
 	if(includedChars("mr:", 1,1,1,arr) <= 0)
 	{
 		DEBUG_PRINT(("B: Failed Exlusion test\n"));
+		return 0;
 	}
 
 
@@ -592,7 +575,7 @@ void matchC(char* arr[], int numStr, int hasT_Flag)
 				if((matchC_Arg(arr[i])))
 				{
 
-				printf("yesT\n");
+				printC(arr[i]);
 				DEBUG_PRINT(("$$$  %s\n", arr[i]));
 				DEBUG_PRINT(("////////////////////////////////////////\n\n\n"));
 				}
@@ -675,7 +658,7 @@ int matchC_Arg(char arr[])
 
 	}
 
-	printf(" X = %s\n", arr + matchIndex);
+//	printf(" X = %s\n", arr + matchIndex);
 
 	int lengthOf_X_Sequence = lengthOfMatch;
 
@@ -683,6 +666,7 @@ int matchC_Arg(char arr[])
 	{
 		DEBUG_PRINT(("C: Failed X Sequence test\n"));
 		DEBUG_PRINT(("C: X Sequence Match = %d\n", lengthOf_X_Sequence));
+		return 0;
 	}
 
 
@@ -713,6 +697,7 @@ int matchC_Arg(char arr[])
 	if(result5 <= 0)
 	{
 		DEBUG_PRINT(("Failed s test\n"));
+		return 0;
 	}
 
 
@@ -725,6 +710,7 @@ int matchC_Arg(char arr[])
 	if(result9 == 0 || result6 == 0 || result7 == 0)
 	{
 		DEBUG_PRINT(("C: Failed DEC test\n"));
+		return 0;
 	}
 
 
@@ -751,12 +737,14 @@ int matchC_Arg(char arr[])
 
 		DEBUG_PRINT(("Failed 3X test\n"));
 		DEBUG_PRINT(("Failed 3X = %s \n", arr3));
+		return 0;
 	
 	}
 
 	if(includedChars("is_,", 1,1,1,arr) <= 0)
 	{
 		DEBUG_PRINT(("C: Failed Exlusion test\n"));
+		return 0;
 	}
 
 	return 1;
@@ -969,11 +957,42 @@ void reverse(char arr[])
 	}
 
 	int k;
-	for(k = i -1; i >= 0; i = i -1)
+	for(k = i -1; k >= 0; k = k -1)
 	{
 		printf("%c", arr[k]);
 	}
 		printf("\n");
+}
+
+void printC(char arr[])
+{
+	int k;
+	for(k = 0; arr[k] != '\0'; k++)
+	{
+		if(arr[k] == 'F' || arr[k] == 'C')
+		{
+
+		}else
+		{
+			printf("%c", arr[k]);
+		}	
+	}
+		printf("\n");
+
+}
+
+void printB(char arr[])
+{
+	int k;
+	for(k = 0; arr[k] != '\0'; k++)
+	{
+		printf("%c", arr[k]);
+
+		if(arr[k] == 'E')
+	printf("%c", 'H');
+	}
+		printf("\n");
+
 }
 
 void add_X_after_Y(char* in, char* out)

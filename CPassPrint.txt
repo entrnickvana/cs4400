@@ -1,0 +1,34 @@
+iiiiiiiii,sss_791
+iiiiiiii,Bsss_148BBB
+iiiiiiii,AEEsss_781AEEAEEAEE
+iiiiii,GDEEGsss_854GDEEGGDEEGGDEEG
+iiiiii,GGsss_391GGGGGG
+iiiiiiii,Bsssssss_219BBB
+iiiiiiii,HBsssssss_857HBHBHB
+iiiiiiiii,Gsssssss_613GGG
+iiiiii,Hsssss_6HHH
+iiiiii,Gsssss_302GGG
+
+
+///////////////////////////////////
+
+
+→ iiiiiiiii,sss_791
+
+→ iiiiiiii,Bsss_148BBB
+
+→ iiiiiiii,AEEsss_781AEEAEEAEE
+
+→ iiiiii,GDEEGsss_854GDEEGGDEEGGDEEG
+
+→ iiiiii,GGsss_391GGGGGG
+
+→ iiiiiiii,Bsssssss_219BBB
+
+→ iiiiiiii,HBsssssss_857HBHBHB
+
+→ iiiiiiiii,Gsssssss_613GGG
+
+→ iiiiii,Hsssss_6HHH
+
+→ iiiiii,Gsssss_302GGG
