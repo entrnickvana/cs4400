@@ -21,6 +21,8 @@ I: 1
 C: i = 21, matchIndex = 11
  X = Fsss_791FFF
 Length of sequence 3x = 3
+Failed Exclusion Test, . not incl!uded
+C: Failed Exlusion test
 yes
 $$$  .iiiiiiiii,Fsss_791FFF
 ////////////////////////////////////////
@@ -31,6 +33,8 @@ I: 1
 C: i = 21, matchIndex = 10
  X = Fsss_791FFF.
 Length of sequence 3x = 3
+Failed Exclusion Test, . not incl!uded
+C: Failed Exlusion test
 yes
 $$$  iiiiiiiii,Fsss_791FFF.
 ////////////////////////////////////////
@@ -62,6 +66,8 @@ I: 1
 C: i = 21, matchIndex = 10
  X = Dsss=436DDD
 Length of sequence 3x = 3
+Failed Exclusion Test, = not incl!uded
+C: Failed Exlusion test
 yes
 $$$  iiiiiiiii,Dsss=436DDD
 ////////////////////////////////////////
@@ -107,6 +113,8 @@ C: i = 21, matchIndex = 5
  X = Gnnnnnnnnn_419GGG
 Failed s test
 Length of sequence 3x = 3
+Failed Exclusion Test, : not incl!uded
+C: Failed Exlusion test
 yes
 $$$  cccc:Gnnnnnnnnn_419GGG
 ////////////////////////////////////////
@@ -122,6 +130,8 @@ C: i = 33, matchIndex = 18
  X = HDFDHHDFDHHDFDH
 Failed s test
 Length of sequence 3x = 21
+Failed Exclusion Test, d not incl!uded
+C: Failed Exlusion test
 yes
 $$$  d,HDFDHvvvvvvv_893HDFDHHDFDHHDFDH
 ////////////////////////////////////////
@@ -145,6 +155,8 @@ I: 1
 C: i = 27, matchIndex = 6
  X = GEGsssss_334GEGGEGGEG
 Length of sequence 3x = 3
+Failed Exclusion Test, : not incl!uded
+C: Failed Exlusion test
 yes
 $$$  iiiii:GEGsssss_334GEGGEGGEG
 ////////////////////////////////////////

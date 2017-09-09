@@ -1,0 +1,118 @@
+Entered Main
+Type A_
+./a.out
+-a
+.gggg=z_185
+gggg=z_185.
+gggg:zzzzzzzzz_860
+gggg_zzz_756
+gggg=zzzzzzzzz:805
+gggg=wwwwwwww:532
+jjj:zzzzz_887
+gggg,zzzzzzzzz_665
+gggg=ssss_286
+gggg_z,211
+jjj=zzzzz:896
+gggg=yyy_52
+gggg_492=z
+_gggg=483zzzzzzzzz
+Failed Exclusion Test, . not incl!uded
+A: Failed Exlusion test
+yes
+$$$  .gggg=z_185
+////////////////////////////////////////
+
+
+Failed Exclusion Test, . not incl!uded
+A: Failed Exlusion test
+yes
+$$$  gggg=z_185.
+////////////////////////////////////////
+
+
+Failed = test
+Failed Exclusion Test, : not incl!uded
+A: Failed Exlusion test
+yes
+$$$  gggg:zzzzzzzzz_860
+////////////////////////////////////////
+
+
+Failed _ test
+Failed = test
+yes
+$$$  gggg_zzz_756
+////////////////////////////////////////
+
+
+Failed _ test
+Failed Exclusion Test, : not incl!uded
+A: Failed Exlusion test
+yes
+$$$  gggg=zzzzzzzzz:805
+////////////////////////////////////////
+
+
+Failed z test
+Failed _ test
+Failed Exclusion Test, : not incl!uded
+A: Failed Exlusion test
+yes
+$$$  gggg=wwwwwwww:532
+////////////////////////////////////////
+
+
+Failed = test
+Failed Exclusion Test, : not incl!uded
+A: Failed Exlusion test
+yes
+$$$  jjj:zzzzz_887
+////////////////////////////////////////
+
+
+Failed = test
+Failed Exclusion Test, , not incl!uded
+A: Failed Exlusion test
+yes
+$$$  gggg,zzzzzzzzz_665
+////////////////////////////////////////
+
+
+Failed z test
+yes
+$$$  gggg=ssss_286
+////////////////////////////////////////
+
+
+Failed = test
+Failed Exclusion Test, , not incl!uded
+A: Failed Exlusion test
+yes
+$$$  gggg_z,211
+////////////////////////////////////////
+
+
+Failed _ test
+Failed Exclusion Test, : not incl!uded
+A: Failed Exlusion test
+yes
+$$$  jjj=zzzzz:896
+////////////////////////////////////////
+
+
+Failed z test
+yes
+$$$  gggg=yyy_52
+////////////////////////////////////////
+
+
+yes
+$$$  gggg_492=z
+////////////////////////////////////////
+
+
+yes
+$$$  _gggg=483zzzzzzzzz
+////////////////////////////////////////
+
+

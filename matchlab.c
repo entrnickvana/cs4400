@@ -1,6 +1,6 @@
 
 
-#define DEBUG 1
+
 #ifdef DEBUG
 # define DEBUG_PRINT(x) printf x
 #else
@@ -39,12 +39,12 @@ int matchC_Arg(char arr[]);
 
 ascii_type detectAsciiType(char x);
 cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[] );
-void reverse(char* in, char* out);
+void reverse(char arr[]);
 
 void add_X_after_Y(char* in, char* out);
 int isEven(char a);
 int isEvenNum(int a);
-
+int includedChars(char included[], int Upper, int Lower, int Dec, char arr[]);
 
 //Global variables
 int debugOn = 1;
@@ -54,73 +54,6 @@ int main(int argc, char* argv[])
 
 		DEBUG_PRINT(("Entered Main\n"));
 
-
-		/* DEBUG matchRange
-		int x1 = strLength(argv[2]);
-		int x2 =  strLength(argv[3]);
-		printf("Length of arg1 = %d", x1); 
-		printf("\n");
-		printf("Length of arg2 = %d", x2);
-		printf("\n");
-
-		if(matchRange(argv[3], 4, argv[2]) == 1)
-		DEBUG_PRINT(("%s is a match for 4 DEC\n", argv[2]));
-		*/
-
-		/* Debug evenOdd
-		int j;
-		for(j = 4; j < 1000; j = (j+7)*3)
-		if(isEvenNum(j) == 1)
-		DEBUG_PRINT(("J = %d is Even\n ", j));
-		else
-		DEBUG_PRINT(("Arg %d Odd\n ", j));
-		*/
-	
-	
-
-
-
-
-		/*
-		if(detectAsciiType('1') == DEC)
-		{
-			DEBUG_PRINT(("Correct\n"));
-		}
-
-		if(detectAsciiType('A') == UPPER)
-			DEBUG_PRINT(("A is an Upper\n"));
-
-		if(detectAsciiType('z') == LOWER)
-			DEBUG_PRINT(("z is a LOWER\n"));
-
-		if(detectAsciiType('.') == OTHER_ASCII)
-			DEBUG_PRINT((". is a OTHER_ASCII\n"));
-		*/
-
-
-		/*
-		char charArr[] = "Billy Bob";
-
-		int l = strLength(charArr) - 1;
-		int myArr[l];
-
-		int result1 = detectChar('y', charArr, myArr);
-
-		printf("%d\n", result1 );
-		*/
-
-		//range test
-
-		
-		/*
-		int a1 = 2;
-		int b2 = 3;
-		int c3 = 4;
-		int* arrOfPtr[3] = {&a1, &b2, &c3};
-*/
-
-		//printf("The size of type char* arrOfPtr = %d\n", (int)sizeof(arrOfPtr)/( (int)sizeof(int*)));
-		//printf(" the size of a char is %d\n", (int) sizeof(int*));
 
 		cmd_type command = identifyCMD_Type(argc, argv);
 
@@ -150,7 +83,7 @@ arg_type identifyArgType(char* cmdArg)
 	if(cmdArg[0] == '\0')
 	{
 
-		fprintf(stderr, "Error, null character");
+		//fprintf(stderr, "Error, null character");
 
 		return ERROR_ARG;
 
@@ -347,8 +280,6 @@ int matchA_Arg(char arr[])
 	check4 = matchRange("gggg", 4, arr);
 	check5 = matchRange("ggggg", 5, arr);
 
-	printf("Check 4 = %d, Check 5 = %d\n",check4, check5);
-
 	if((check5 == 0 && check4 == 0))
 	{
 		DEBUG_PRINT(("Failed g test, check5 = %d, check 4 = %d\n", check5, check4));
@@ -397,6 +328,11 @@ int matchA_Arg(char arr[])
 	if(result5 == 0 || result6 == 0 || result7 == 0)
 	{
 		DEBUG_PRINT(("Failed DEC test\n"));
+	}
+
+	if(includedChars("g=z_", 1,1,1,arr) <= 0)
+	{
+		DEBUG_PRINT(("A: Failed Exlusion test\n"));
 	}
 
 	return 1;
@@ -498,26 +434,21 @@ int matchB_Arg(char arr[])
 
 		DEBUG_PRINT(("Length of String %d\n", length_of_string));
 
-	int startIndex = 0;
+	int startIndex = length_of_string;
 
-	if(isEvenNum( length_of_string) == 1)
-		startIndex = length_of_string -1;
-	else
-		startIndex = length_of_string;
-
-	for(i = startIndex; i >= 1; i = i - 2)
+	for(i = startIndex; i >= 1; i = i - 1)
 	{
-		matchIndex = matchRangeOfType(UPPER, i, arr);
-		if(matchIndex >= 1)
+		if(!isEvenNum(i))
 		{
+			matchIndex = matchRangeOfType(UPPER, i, arr);
+			if(matchIndex >= 1)
+			{
 
-			lengthOfMatch = i;
+				lengthOfMatch = i;
 
-			DEBUG_PRINT(("I: %d\n", i));
-			i = 0;
-
-
-
+				DEBUG_PRINT(("I: %d\n", i));
+				i = 0;
+			}
 		}
 
 		DEBUG_PRINT(("i = %d, matchIndex = %d\n" , i, matchIndex));
@@ -571,19 +502,21 @@ int matchB_Arg(char arr[])
 		lengthOfEvens = (int)((((unsigned)lengthOfMatch) - 1) >> 1);
 	}
 
+	if(lengthOfEvens == 0)
+		lengthOfEvens = 1;
+
 	DEBUG_PRINT(("Length of evens: %d\n", lengthOfEvens));
 
 	char evens_Of_X[lengthOfEvens];
 	int nuIndex = 0;
 
 	int k;
-	for(k = matchIndex; k < lengthOfMatch + matchIndex; k++)
+	for(k = matchIndex; k < lengthOfMatch + matchIndex; k = k + 2)
 	{
-		if(isEvenNum(k) == 1)
-		{
+
 			evens_Of_X[nuIndex++] =  arr[k];
 			DEBUG_PRINT(("The char: %c\n", arr[k]));
-		}
+
 
 	}
 
@@ -613,6 +546,11 @@ int matchB_Arg(char arr[])
 		DEBUG_PRINT(("B: Failed 3 digit\n"));	
 		DEBUG_PRINT(("B: 1: %d  2:%d  3: %d digit\n", result5, result6, result7));
 
+	}
+
+	if(includedChars("mr:", 1,1,1,arr) <= 0)
+	{
+		DEBUG_PRINT(("B: Failed Exlusion test\n"));
 	}
 
 
@@ -816,6 +754,43 @@ int matchC_Arg(char arr[])
 	
 	}
 
+	if(includedChars("is_,", 1,1,1,arr) <= 0)
+	{
+		DEBUG_PRINT(("C: Failed Exlusion test\n"));
+	}
+
+	return 1;
+}
+
+int includedChars(char included[], int Upper, int Lower, int Dec, char arr[])
+{
+	
+	int k;
+	int l = strLength(included);
+	int stringL = strLength(arr);
+	int resultArr[l];
+	int result = -1;
+
+
+		for(k = 0; k < stringL; k++)
+		{
+				if(detectChar(arr[k], included, resultArr) <= 0)
+				{
+
+					/*
+					if(	   ((detectAsciiType(arr[k]) != UPPER) && Upper)
+						|| ((detectAsciiType(arr[k]) != LOWER) && Lower)
+						|| ((detectAsciiType(arr[k]) != DEC) && Dec)
+					*/
+					if((detectAsciiType(arr[k]) == OTHER_ASCII))
+					{
+							DEBUG_PRINT(("Failed Exclusion Test, %c not incl!uded\n", arr[k]));
+							return 0;
+					}
+				}
+
+		}
+
 
 
 	return 1;
@@ -985,10 +960,20 @@ cmd_type identifyCMD_Type(int numOfArgs, char* arrOfArgs[])
 }
 
 
-void reverse(char* in, char* out)
+void reverse(char arr[])
 {
+	int i;
+	for(i = 0; arr[i] != '\0'; i++)
+	{
 
+	}
 
+	int k;
+	for(k = i -1; i >= 0; i = i -1)
+	{
+		printf("%c", arr[k]);
+	}
+		printf("\n");
 }
 
 void add_X_after_Y(char* in, char* out)
@@ -1013,7 +998,7 @@ ascii_type detectAsciiType(char x)
 		x == 'y' || x == 'z'
 	  ) return LOWER;
 
-	if(	x == '1' || x == '2' || x == '3' || x == '4' || x == '5' || x == '6' || x == '7' || x == '8' ||
+	if(	x == '0' || x == '1' || x == '2' || x == '3' || x == '4' || x == '5' || x == '6' || x == '7' || x == '8' ||
 		x == '9'
 	  ) return DEC;
 

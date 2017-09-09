@@ -1,0 +1,48 @@
+
+		/// Check number of Flag arguments
+
+		/*
+	
+		- 45
+		a 97
+		b 98
+		c 99
+		t 116
+
+
+
+		*/
+		int i;
+		for(i = 1; i < argc; i++)
+		{
+			DEBUG_PRINT(("For: %d\n\n", i));
+
+			arg_type ID = identifyArgType(argv[i]);
+			if(ID == A)
+			{
+				fprintf(stderr, "A\n");
+				
+
+
+			}else if(ID == B)
+			{
+				fprintf(stderr, "B\n");
+
+			}else if(ID == C)
+			{
+				fprintf(stderr, "C\n");
+
+			}else if(ID == T)
+			{
+
+				fprintf(stderr, "T\n");
+			}else if(ID == CMD_ARG)
+			{
+				fprintf(stderr, "CMD_ARG\n");
+			}else
+			{
+				fprintf(stderr, "Error\n");
+			}
+
+
+		}

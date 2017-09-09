@@ -1,1 +1,1 @@
-./a.out -b mmmm:Crrrrrrrr:C232 mmmmmm:HEGrrr:HG538 :BCCrr:BC173 mmmmmmmm:BDFrrrrrrr:BF252  mm:BBArrrrr:BA649  mmmm:DBBDBrrrr:DBB703 mmmm:EBBrrrrrrrrr:EB965 mmmm:CDGrrrrr:CG503 mmmmmmmm:Brrrr:B997 mmmmmmmm:Errr:E375
+./a.out -b mmmm:Crrrrrrrr:C232 mmmmmm:HEGrrr:HG538 :BCCrr:BC173 mmmmmmmm:BDFrrrrrrr:BF252 mm:BBArrrrr:BA649 mmmm:DBBDBrrrr:DBB703 mmmm:EBBrrrrrrrrr:EB965 mmmm:CDGrrrrr:CG503 mmmmmmmm:Brrrr:B997 mmmmmmmm:Errr:E375 > BPass1.txt

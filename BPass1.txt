@@ -14,22 +14,27 @@ mmmmmmmm:Brrrr:B997
 mmmmmmmm:Errr:E375
 Length of String 19
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 5
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 5
-Range length = 1
-Evanes string = mmmm:Crrrrrrrr:C232
-Evanes string = 
+Length of evens: 1
+The char: C
 yes
 $$$  mmmm:Crrrrrrrr:C232
 ////////////////////////////////////////
@@ -37,30 +42,45 @@ $$$  mmmm:Crrrrrrrr:C232
 
 Length of String 19
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 7
 Length of evens: 1
-The char: E
+The char: H
+The char: G
 yes
 $$$  mmmmmm:HEGrrr:HG538
 ////////////////////////////////////////
 
 
 Length of String 12
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 1
 Length of evens: 1
+The char: B
 The char: C
 yes
 $$$  :BCCrr:BC173
@@ -69,20 +89,32 @@ $$$  :BCCrr:BC173
 
 Length of String 25
 i = 25, matchIndex = -1
+i = 24, matchIndex = -1
 i = 23, matchIndex = -1
+i = 22, matchIndex = -1
 i = 21, matchIndex = -1
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 9
 Length of evens: 1
-The char: D
+The char: B
+The char: F
 yes
 $$$  mmmmmmmm:BDFrrrrrrr:BF252
 ////////////////////////////////////////
@@ -90,21 +122,25 @@ $$$  mmmmmmmm:BDFrrrrrrr:BF252
 
 Length of String 17
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 3
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 3
-Range length = 1
-Evanes string = mm:BBArrrrr:BA649
-Evanes string = 
+Length of evens: 1
+The char: B
 yes
 $$$  mm:BBArrrrr:BA649
 ////////////////////////////////////////
@@ -112,17 +148,27 @@ $$$  mm:BBArrrrr:BA649
 
 Length of String 21
 i = 21, matchIndex = -1
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 5
 Length of evens: 1
+The char: D
 The char: B
 yes
 $$$  mmmm:DBBDBrrrr:DBB703
@@ -131,18 +177,29 @@ $$$  mmmm:DBBDBrrrr:DBB703
 
 Length of String 23
 i = 23, matchIndex = -1
+i = 22, matchIndex = -1
 i = 21, matchIndex = -1
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 5
 Length of evens: 1
+The char: E
 The char: B
 yes
 $$$  mmmm:EBBrrrrrrrrr:EB965
@@ -151,17 +208,26 @@ $$$  mmmm:EBBrrrrrrrrr:EB965
 
 Length of String 19
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 5
 Length of evens: 1
-The char: D
+The char: C
+The char: G
 yes
 $$$  mmmm:CDGrrrrr:CG503
 ////////////////////////////////////////
@@ -169,44 +235,54 @@ $$$  mmmm:CDGrrrrr:CG503
 
 Length of String 19
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 9
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 9
-Range length = 1
-Evanes string = mmmmmmmm:Brrrr:B997
-Evanes string = 
+Length of evens: 1
+The char: B
 yes
 $$$  mmmmmmmm:Brrrr:B997
 ////////////////////////////////////////
 
 
 Length of String 18
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 9
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 9
-Range length = 1
-Evanes string = mmmmmmmm:Errr:E375
-Evanes string = 
+Length of evens: 1
+The char: E
 yes
 $$$  mmmmmmmm:Errr:E375
 ////////////////////////////////////////

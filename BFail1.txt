@@ -17,103 +17,145 @@ mm:Dqqq:D601
 :rrrrr:333DDEmmmmmmDE
 mmmmmmrrrrrrr446::GG
 Length of String 20
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 6
 Length of evens: 1
 The char: C
+Failed Exclusion Test, . not incl!uded
+B: Failed Exlusion test
 yes
 $$$  .mmmm:Crrrrrrrr:C232
 ////////////////////////////////////////
 
 
 Length of String 20
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 5
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 5
-Range length = 1
-Evanes string = mmmm:Crrrrrrrr:C232.
-Evanes string = 
+Length of evens: 1
+The char: C
+Failed Exclusion Test, . not incl!uded
+B: Failed Exlusion test
 yes
 $$$  mmmm:Crrrrrrrr:C232.
 ////////////////////////////////////////
 
 
 Length of String 16
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 9
 B: Failed : test
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 9
-Range length = 1
-Evanes string = llllllll:Crrr,80
-Evanes string = 
+Length of evens: 1
+The char: C
+Failed Exclusion Test, , not incl!uded
+B: Failed Exlusion test
 yes
 $$$  llllllll:Crrr,80
 ////////////////////////////////////////
 
 
 Length of String 12
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 3
 B: Failed : test
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 3
-Range length = 1
-Evanes string = mm,Errr=E510
-Evanes string = 
+Length of evens: 1
+The char: E
+Failed Exclusion Test, , not incl!uded
+B: Failed Exlusion test
 yes
 $$$  mm,Errr=E510
 ////////////////////////////////////////
 
 
 Length of String 20
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 5
 B: Failed : test
 Length of evens: 1
-The char: D
+The char: B
+The char: G
+Failed Exclusion Test, , not incl!uded
+B: Failed Exlusion test
 yes
 $$$  mmmm:BDGADrrrr,DA947
 ////////////////////////////////////////
@@ -121,21 +163,32 @@ $$$  mmmm:BDGADrrrr,DA947
 
 Length of String 23
 i = 23, matchIndex = -1
+i = 22, matchIndex = -1
 i = 21, matchIndex = -1
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 9
 B: Failed r test
 B: result4 = 0
 Length of evens: 1
-The char: F
+The char: E
+The char: D
 yes
 $$$  mmmmmmmm:EFDxxxxx:ED274
 ////////////////////////////////////////
@@ -143,21 +196,23 @@ $$$  mmmmmmmm:EFDxxxxx:ED274
 
 Length of String 13
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 3
 B: Failed r test
 B: result4 = 0
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 3
-Range length = 1
-Evanes string = mm:AFDq:AD119
-Evanes string = 
+Length of evens: 1
+The char: A
 yes
 $$$  mm:AFDq:AD119
 ////////////////////////////////////////
@@ -165,20 +220,22 @@ $$$  mm:AFDq:AD119
 
 Length of String 9
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 1
 B: Failed : test
 B: Failed r test
 B: result4 = 0
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 1
-Range length = 1
-Evanes string = ,Czz,C725
-Evanes string = 
+Length of evens: 1
+The char: C
+Failed Exclusion Test, , not incl!uded
+B: Failed Exlusion test
 yes
 $$$  ,Czz,C725
 ////////////////////////////////////////
@@ -186,81 +243,103 @@ $$$  ,Czz,C725
 
 Length of String 23
 i = 23, matchIndex = -1
+i = 22, matchIndex = -1
 i = 21, matchIndex = -1
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 I: 5
 i = 0, matchIndex = 7
 B: Failed : test
 Length of evens: 2
-The char: G
 The char: E
+The char: D
+The char: F
+Failed Exclusion Test, _ not incl!uded
+B: Failed Exlusion test
 yes
 $$$  mmmmmm_EGDEFrrrr:EDF754
 ////////////////////////////////////////
 
 
 Length of String 12
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 3
 B: Failed : test
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 3
-Range length = 1
-Evanes string = mm=Grrr:G722
-Evanes string = 
+Length of evens: 1
+The char: G
+Failed Exclusion Test, = not incl!uded
+B: Failed Exlusion test
 yes
 $$$  mm=Grrr:G722
 ////////////////////////////////////////
 
 
 Length of String 12
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 3
 B: Failed : test
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 3
-Range length = 1
-Evanes string = mm:Arrr=A503
-Evanes string = 
+Length of evens: 1
+The char: A
+Failed Exclusion Test, = not incl!uded
+B: Failed Exlusion test
 yes
 $$$  mm:Arrr=A503
 ////////////////////////////////////////
 
 
 Length of String 12
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 3
 B: Failed r test
 B: result4 = 0
-Length of evens: 0
-B: Failed Evense test
-B: MatchIndex 3
-Range length = 1
-Evanes string = mm:Dqqq:D601
-Evanes string = 
+Length of evens: 1
+The char: D
 yes
 $$$  mm:Dqqq:D601
 ////////////////////////////////////////
@@ -268,14 +347,23 @@ $$$  mm:Dqqq:D601
 
 Length of String 21
 i = 21, matchIndex = -1
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 I: 3
 i = 0, matchIndex = 10
 Length of evens: 2
@@ -287,15 +375,25 @@ $$$  :rrrrr:333DDEmmmmmmDE
 
 
 Length of String 20
+i = 20, matchIndex = -1
 i = 19, matchIndex = -1
+i = 18, matchIndex = -1
 i = 17, matchIndex = -1
+i = 16, matchIndex = -1
 i = 15, matchIndex = -1
+i = 14, matchIndex = -1
 i = 13, matchIndex = -1
+i = 12, matchIndex = -1
 i = 11, matchIndex = -1
+i = 10, matchIndex = -1
 i = 9, matchIndex = -1
+i = 8, matchIndex = -1
 i = 7, matchIndex = -1
+i = 6, matchIndex = -1
 i = 5, matchIndex = -1
+i = 4, matchIndex = -1
 i = 3, matchIndex = -1
+i = 2, matchIndex = -1
 I: 1
 i = 0, matchIndex = 18
 Length of evens: 1
