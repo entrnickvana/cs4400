@@ -72,6 +72,7 @@ void pinwheel_1(pixel *src, pixel *dest)
 
 	int localDim = src->dim;
 	int hlfDim = localDim/2;
+	int result = 0;
 
   /* Loop over 4 quadrants: */
   for (qi = 0; qi < 2; qi++)
@@ -87,17 +88,13 @@ void pinwheel_1(pixel *src, pixel *dest)
                            i + (qi * hlfDim),
                            localDim);
 
-          dest[d_idx].red = (src[s_idx].red
-                             + src[s_idx].green
-                             + src[s_idx].blue) / 3;
+          result =  (src[s_idx].red + src[s_idx].green + src[s_idx].blue) / 3;
 
-          dest[d_idx].green = (src[s_idx].red
-                               + src[s_idx].green
-                               + src[s_idx].blue) / 3;
+          dest[d_idx].red = result;
 
-          dest[d_idx].blue = (src[s_idx].red
-                              + src[s_idx].green
-                              + src[s_idx].blue) / 3;
+          dest[d_idx].green = result;
+
+          dest[d_idx].blue = result;
         }
 }
 
