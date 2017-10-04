@@ -72,20 +72,30 @@ void pinwheel_1(pixel *src, pixel *dest)
 
 	int localDim = src->dim;
 	int hlfDim = localDim/2;
+	int qj_hlf_dim;
+	int qi_hlf_dim;
 	int result = 0;
 
+
   /* Loop over 4 quadrants: */
-  for (qi = 0; qi < 2; qi++)
-    for (qj = 0; qj < 2; qj++)
+  for (qi = 0; qi < 2; qi++){
+
+    for (qj = 0; qj < 2; qj++){
       /* Loop within quadrant: */
-      for (i = 0; i < hlfDim; i++)
-        for (j = 0; j < hlfDim; j++) {
-          int s_idx = RIDX((qj * hlfDim) + i, 
-          				   j + (qi * hlfDim),
+
+      for (j = 0; j < hlfDim; j++){
+
+        for (i = 0; i < hlfDim; i++) {
+
+          qj_hlf_dim = qj * hlfDim;
+          qi_hlf_dim = qi * hlfDim;
+
+          int s_idx = RIDX(qj_hlf_dim + i, 
+          				   j + (qi_hlf_dim),
           				   localDim);
 
-          int d_idx = RIDX((qj * hlfDim) + hlfDim- 1 - j,
-                           i + (qi * hlfDim),
+          int d_idx = RIDX((qj_hlf_dim) + hlfDim- 1 - j,
+                           i + (qi_hlf_dim),
                            localDim);
 
           result =  (src[s_idx].red + src[s_idx].green + src[s_idx].blue) / 3;
@@ -96,6 +106,10 @@ void pinwheel_1(pixel *src, pixel *dest)
 
           dest[d_idx].blue = result;
         }
+      }
+
+    }
+  }
 }
 
 /* 
@@ -190,6 +204,22 @@ static pixel weighted_combo(int dim, int i, int j, pixel *src)
   return current_pixel;
 }
 
+
+
+void motion1(pixel *src, pixel *dst) 
+{
+  int i, j;
+  int dim = src->dim;
+
+  for (j = 0; j < dim; j++){
+
+    for (i = 0; i < dim; i++){
+
+      dst[RIDX(i, j, dim)] = weighted_combo(dim, i, j, src);
+    }
+  }
+}
+
 /******************************************************
  * Your different versions of the motion kernel go here
  ******************************************************/
@@ -211,10 +241,11 @@ void naive_motion(pixel *src, pixel *dst)
  * motion - Your current working version of motion. 
  * IMPORTANT: This is the version you will be graded on
  */
-char motion_descr[] = "motion: Current working version";
+char motion_descr[] = "motion V1";
 void motion(pixel *src, pixel *dst) 
 {
-  naive_motion(src, dst);
+  motion1(src, dst);
+
 }
 
 /********************************************************************* 
