@@ -70,12 +70,14 @@ void pinwheel_1(pixel *src, pixel *dest)
 
 	*/
 
+	int ii;
+	int jj;
 	int localDim = src->dim;
 	int hlfDim = localDim/2;
 	int qj_hlf_dim;
 	int qi_hlf_dim;
 	int result = 0;
-
+	int W = 16;
 
   /* Loop over 4 quadrants: */
   for (qi = 0; qi < 2; qi++){
@@ -83,28 +85,36 @@ void pinwheel_1(pixel *src, pixel *dest)
     for (qj = 0; qj < 2; qj++){
       /* Loop within quadrant: */
 
-      for (j = 0; j < hlfDim; j++){
+      for (j = 0; j < hlfDim; j+= W){
 
-        for (i = 0; i < hlfDim; i++) {
+        for (i = 0; i < hlfDim; i+= W) {
 
-          qj_hlf_dim = qj * hlfDim;
-          qi_hlf_dim = qi * hlfDim;
+        	for(jj = j; jj < j + W; jj++){
+	        	for(ii = i; ii < i + W; ii++){
+	        
 
-          int s_idx = RIDX(qj_hlf_dim + i, 
-          				   j + (qi_hlf_dim),
-          				   localDim);
+		          qj_hlf_dim = qj * hlfDim;
+		          qi_hlf_dim = qi * hlfDim;
 
-          int d_idx = RIDX((qj_hlf_dim) + hlfDim- 1 - j,
-                           i + (qi_hlf_dim),
-                           localDim);
+		          int s_idx = RIDX(qj_hlf_dim + ii, 
+		          				   jj + (qi_hlf_dim),
+		          				   localDim);
 
-          result =  (src[s_idx].red + src[s_idx].green + src[s_idx].blue) / 3;
+		          int d_idx = RIDX((qj_hlf_dim) + hlfDim- 1 - jj,
+		                           ii + (qi_hlf_dim),
+		                           localDim);
 
-          dest[d_idx].red = result;
+		          result =  (src[s_idx].red + src[s_idx].green + src[s_idx].blue) / 3;
 
-          dest[d_idx].green = result;
+		          dest[d_idx].red = result;
 
-          dest[d_idx].blue = result;
+		          dest[d_idx].green = result;
+
+		          dest[d_idx].blue = result;
+		      	}
+        	}
+		    
+	      	
         }
       }
 
