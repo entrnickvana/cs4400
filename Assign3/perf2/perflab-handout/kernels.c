@@ -126,7 +126,7 @@ void pinwheel_1(pixel *src, pixel *dest)
  * pinwheel - Your current working version of pinwheel
  * IMPORTANT: This is the version you will be graded on
  */
-char pinwheel_descr[] = "pinwheel: Current working version V1";
+char pinwheel_descr[] = "pinwheel: Current working version V1 (for grading)";
 void pinwheel(pixel *src, pixel *dest)
 {
   pinwheel_1(src, dest);
@@ -214,18 +214,124 @@ static pixel weighted_combo(int dim, int i, int j, pixel *src)
   return current_pixel;
 }
 
+static pixel weighted_combo2(int dim, int i, int j, pixel *src) 
+{
+
+  pixel_sum sum;
+  pixel current_pixel;
+ 
+  initialize_pixel_sum(&sum);
+
+/*
+  		 sum.red =    (  	(int)(i_base0_0->red * 0.6)
+  		 				+  	(int)(i_base1_1->red  * 0.3)
+  		 				+  	(int)(i_base2_2->red  * 0.1)
+  		 				+  	(int)(i_base1_0->red  * 0.03)
+  		 				+  	(int)(i_base0_1->red  * 0.03)
+  		 				+  	(int)(i_base1_2->red  * 0.03)
+  		 				+  	(int)(i_base2_1->red  * 0.03));
+
+  		 sum.green =    (  	(int)(i_base0_0->green * 0.6)
+  		 				+  	(int)(i_base1_1->green  * 0.3)
+  		 				+  	(int)(i_base2_2->green  * 0.1)
+  		 				+  	(int)(i_base1_0->green  * 0.03)
+  		 				+  	(int)(i_base0_1->green * 0.03)
+  		 				+  	(int)(i_base1_2->green * 0.03)
+  		 				+  	(int)(i_base2_1->green  * 0.03));
+
+  		 sum.blue =    (  	(int)(i_base0_0->blue * 0.6)
+  		 				+  	(int)(i_base1_1->blue * 0.3)
+  		 				+  	(int)(i_base2_2->blue * 0.1)
+  		 				+  	(int)(i_base1_0->blue * 0.03)
+  		 				+  	(int)(i_base0_1->blue * 0.03)
+  		 				+  	(int)(i_base1_2->blue * 0.03)
+  		 				+  	(int)(i_base2_1->blue * 0.03));
+*/
+
+  		sum.red = 	(	(int)(src[RIDX(i,j,dim)].red * 6/10)
+  					+	(int)(src[RIDX(i+1,j+1,dim)].red * 3/10)
+  					+	(int)(src[RIDX(i+2,j+2,dim)].red * 1/10)
+  					+	(int)(src[RIDX(i,j+1,dim)].red * 3/100)
+  					+	(int)(src[RIDX(i+1,j,dim)].red * 3/100)
+  					+	(int)(src[RIDX(i+1,j+2,dim)].red * 3/100)
+  					+	(int)(src[RIDX(i+2,j+1,dim)].red * 3/100)
+
+  					);
+
+  		sum.green = (	(int)(src[RIDX(i,j,dim)].green * 6/10)
+  					+	(int)(src[RIDX(i+1,j+1,dim)].green * 3/10)
+  					+	(int)(src[RIDX(i+2,j+2,dim)].green * 1/10)
+  					+	(int)(src[RIDX(i,j+1,dim)].green * 3/100)
+  					+	(int)(src[RIDX(i+1,j,dim)].green * 3/100)
+  					+	(int)(src[RIDX(i+1,j+2,dim)].green * 3/100)
+  					+	(int)(src[RIDX(i+2,j+1,dim)].green * 3/100)
+
+  					);
+
+  		sum.blue = (	(int)(src[RIDX(i,j,dim)].blue * 6/10)
+  					+	(int)(src[RIDX(i+1,j+1,dim)].blue * 3/10)
+  					+	(int)(src[RIDX(i+2,j+2,dim)].blue * 1/10)
+  					+	(int)(src[RIDX(i,j+1,dim)].blue * 3/100)
+  					+	(int)(src[RIDX(i+1,j,dim)].blue * 3/100)
+  					+	(int)(src[RIDX(i+1,j+2,dim)].blue * 3/100)
+  					+	(int)(src[RIDX(i+2,j+1,dim)].blue * 3/100)
+
+  					);
+
+/*
+  		 sum.red =  (		(int)(src[RIDX(i,j,dim)].red * (6/10))
+  		 				+  	(int)(src[RIDX(i+1,j+1,dim)].red * (3/10))
+  		 				+  	(int)(src[RIDX(i+2,j+2,dim)].red * (1/10))
+  		 				+   (int)(src[RIDX(i,j+1,dim)].red * (3/100))
+  		 				+  	(int)(src[RIDX(i+1,j,dim)].red * (3/100))
+  		 				+  	(int)(src[RIDX(i+1,j+2,dim)].red * (3/100))
+  		 				+  	(int)(src[RIDX(i+2,j+1,dim)].red * (3/100)));
+
+  		 sum.green =  (		(int)(src[RIDX(i,j,dim)].green * (6/10))
+  		 				+  	(int)(src[RIDX(i+1,j+1,dim)].green * (3/10))
+  		 				+  	(int)(src[RIDX(i+2,j+2,dim)].green * (1/10))
+  		 				+   (int)(src[RIDX(i,j+1,dim)].green * (3/100))
+  		 				+  	(int)(src[RIDX(i+1,j,dim)].green * (3/100))
+  		 				+  	(int)(src[RIDX(i+1,j+2,dim)].green * (3/100))
+  		 				+  	(int)(src[RIDX(i+2,j+1,dim)].green * (3/100)));
+
+  		 sum.blue =  (		(int)(src[RIDX(i,j,dim)].blue * (6/10))
+  		 				+  	(int)(src[RIDX(i+1,j+1,dim)].blue * (3/10))
+  		 				+  	(int)(src[RIDX(i+2,j+2,dim)].blue * (1/10))
+  		 				+   (int)(src[RIDX(i,j+1,dim)].blue * (3/100))
+  		 				+  	(int)(src[RIDX(i+1,j,dim)].blue * (3/100))
+  		 				+  	(int)(src[RIDX(i+1,j+2,dim)].blue * (3/100))
+  		 				+  	(int)(src[RIDX(i+2,j+1,dim)].blue * (3/100)));
+ */
+  
+  assign_sum_to_pixel(&current_pixel, sum);
+
+  return current_pixel;
+
+}
+
+
 
 
 void motion1(pixel *src, pixel *dst) 
 {
-  int i, j;
+  int i, j;	
   int dim = src->dim;
+  
+  for (i = 0; i < dim; i++){
 
-  for (j = 0; j < dim; j++){
+    for (j = 0; j < dim; j++){
 
-    for (i = 0; i < dim; i++){
+      if( (i < (dim -3)) && (j < (dim - 3))){
 
-      dst[RIDX(i, j, dim)] = weighted_combo(dim, i, j, src);
+      	dst[RIDX(i, j, dim)] = weighted_combo2(dim, i, j, src);
+
+      }else{
+
+ 	  	dst[RIDX(i, j, dim)] = weighted_combo(dim, i, j, src);
+
+      }
+
     }
   }
 }
@@ -251,7 +357,7 @@ void naive_motion(pixel *src, pixel *dst)
  * motion - Your current working version of motion. 
  * IMPORTANT: This is the version you will be graded on
  */
-char motion_descr[] = "motion V1";
+char motion_descr[] = "motion version 3 (for grading)";
 void motion(pixel *src, pixel *dst) 
 {
   motion1(src, dst);

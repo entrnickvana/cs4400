@@ -1,0 +1,120 @@
+Entered Main
+Type C_
+./a.out
+-c
+.iiiiiiiii,Fsss_791FFF
+iiiiiiiii,Fsss_791FFF.
+iiiiii,EAGsss_572GAE
+jjjjjjj,GHHsssss_698GHHGHHGHH
+iiiiiiiii,Dsss=436DDD
+hhh,Gsssssss_552GGG
+iiiiii,Cyyyyyyy_309CCC
+iiiiiii,FBGGBsssss_119FGB
+cccc:Gnnnnnnnnn_419GGG
+d,HDFDHvvvvvvv_893HDFDHHDFDHHDFDH
+cc,BEDABuu_513BEDABBEDABBEDAB
+iiiii:GEGsssss_334GEGGEGGEG
+iiiiiiiiiCHH,_sssssssCHHCHHCHH433
+318sssHHDiiiiiiHHDHHDHHD,_
+
+
+
+C : Length of String 22
+I: 1
+C: i = 21, matchIndex = 11
+Length of sequence 3x = 3
+Failed Exclusion Test, . not incl!uded
+C: Failed Exlusion test
+C : Length of String 22
+I: 1
+C: i = 21, matchIndex = 10
+Length of sequence 3x = 3
+Failed Exclusion Test, . not incl!uded
+C: Failed Exlusion test
+C : Length of String 20
+I: 1
+C: i = 19, matchIndex = 7
+Length of sequence 3x = 3
+yes
+$$$  iiiiii,EAGsss_572GAE
+////////////////////////////////////////
+
+
+C Failed i test: result 0
+C : Length of String 29
+I: 1
+C: i = 29, matchIndex = 8
+Length of sequence 3x = 3
+yes
+$$$  jjjjjjj,GHHsssss_698GHHGHHGHH
+////////////////////////////////////////
+
+
+C : Length of String 21
+I: 1
+C: i = 21, matchIndex = 10
+Length of sequence 3x = 3
+Failed Exclusion Test, = not incl!uded
+C: Failed Exlusion test
+C Failed i test: result 0
+C : Length of String 19
+I: 1
+C: i = 19, matchIndex = 4
+Length of sequence 3x = 3
+yes
+$$$  hhh,Gsssssss_552GGG
+////////////////////////////////////////
+
+
+C : Length of String 22
+I: 1
+C: i = 21, matchIndex = 7
+Failed s test
+C : Length of String 25
+I: 1
+C: i = 25, matchIndex = 8
+Length of sequence 3x = 3
+yes
+$$$  iiiiiii,FBGGBsssss_119FGB
+////////////////////////////////////////
+
+
+C Failed i test: result 0
+C: failed , test ',':result = 0
+C : Length of String 22
+I: 1
+C: i = 21, matchIndex = 5
+Failed s test
+C Failed i test: result 0
+C : Length of String 33
+C: i = 1, matchIndex = -1
+C: i = 3, matchIndex = -1
+C: i = 5, matchIndex = -1
+I: 7
+C: i = 33, matchIndex = 18
+Failed s test
+C Failed i test: result 0
+C : Length of String 29
+I: 1
+C: i = 29, matchIndex = 3
+Failed s test
+C: failed , test ',':result = 0
+C : Length of String 27
+I: 1
+C: i = 27, matchIndex = 6
+Length of sequence 3x = 3
+Failed Exclusion Test, : not incl!uded
+C: Failed Exlusion test
+C : Length of String 33
+I: 1
+C: i = 33, matchIndex = 9
+Length of sequence 3x = 3
+yes
+$$$  iiiiiiiiiCHH,_sssssssCHHCHHCHH433
+////////////////////////////////////////
+
+
+C : Length of String 26
+I: 1
+C: i = 25, matchIndex = 6
+C: Failed DEC test

@@ -1,0 +1,309 @@
+Entered Main
+Type B_T
+./a.out
+-b
+-t
+.mmmm:Crrrrrrrr:C232
+mmmm:Crrrrrrrr:C232.
+llllllll:Crrr,80
+mm,Errr=E510
+mmmm:BDGADrrrr,DA947
+mmmmmmmm:EFDxxxxx:ED274
+mm:AFDq:AD119
+,Czz,C725
+mmmmmm_EGDEFrrrr:EDF754
+mm=Grrr:G722
+mm:Arrr=A503
+mm:Dqqq:D601
+:rrrrr:333DDEmmmmmmDE
+mmmmmmrrrrrrr446::GG
+
+
+
+Length of String 20
+i = 20, matchIndex = -1
+i = 19, matchIndex = -1
+i = 18, matchIndex = -1
+i = 17, matchIndex = -1
+i = 16, matchIndex = -1
+i = 15, matchIndex = -1
+i = 14, matchIndex = -1
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 6
+Length of evens: 1
+The char: C
+Failed Exclusion Test, . not incl!uded
+B: Failed Exlusion test
+Length of String 20
+i = 20, matchIndex = -1
+i = 19, matchIndex = -1
+i = 18, matchIndex = -1
+i = 17, matchIndex = -1
+i = 16, matchIndex = -1
+i = 15, matchIndex = -1
+i = 14, matchIndex = -1
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 5
+Length of evens: 1
+The char: C
+Failed Exclusion Test, . not incl!uded
+B: Failed Exlusion test
+Length of String 16
+i = 16, matchIndex = -1
+i = 15, matchIndex = -1
+i = 14, matchIndex = -1
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 9
+B: Failed : test
+Length of String 12
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 3
+B: Failed : test
+Length of String 20
+i = 20, matchIndex = -1
+i = 19, matchIndex = -1
+i = 18, matchIndex = -1
+i = 17, matchIndex = -1
+i = 16, matchIndex = -1
+i = 15, matchIndex = -1
+i = 14, matchIndex = -1
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+I: 3
+i = 0, matchIndex = 5
+B: Failed : test
+Length of String 23
+i = 23, matchIndex = -1
+i = 22, matchIndex = -1
+i = 21, matchIndex = -1
+i = 20, matchIndex = -1
+i = 19, matchIndex = -1
+i = 18, matchIndex = -1
+i = 17, matchIndex = -1
+i = 16, matchIndex = -1
+i = 15, matchIndex = -1
+i = 14, matchIndex = -1
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+I: 3
+i = 0, matchIndex = 9
+B: Failed r test
+B: result4 = 0
+Length of String 13
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 3
+B: Failed r test
+B: result4 = 0
+Length of String 9
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 1
+B: Failed : test
+Length of String 23
+i = 23, matchIndex = -1
+i = 22, matchIndex = -1
+i = 21, matchIndex = -1
+i = 20, matchIndex = -1
+i = 19, matchIndex = -1
+i = 18, matchIndex = -1
+i = 17, matchIndex = -1
+i = 16, matchIndex = -1
+i = 15, matchIndex = -1
+i = 14, matchIndex = -1
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+I: 5
+i = 0, matchIndex = 7
+B: Failed : test
+Length of String 12
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 3
+B: Failed : test
+Length of String 12
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 3
+B: Failed : test
+Length of String 12
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 3
+B: Failed r test
+B: result4 = 0
+Length of String 21
+i = 21, matchIndex = -1
+i = 20, matchIndex = -1
+i = 19, matchIndex = -1
+i = 18, matchIndex = -1
+i = 17, matchIndex = -1
+i = 16, matchIndex = -1
+i = 15, matchIndex = -1
+i = 14, matchIndex = -1
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+I: 3
+i = 0, matchIndex = 10
+Length of evens: 2
+The char: D
+The char: E
+:rrrrr:333DDEHmmmmmmDEH
+$$$  :rrrrr:333DDEmmmmmmDE
+////////////////////////////////////////
+
+
+Length of String 20
+i = 20, matchIndex = -1
+i = 19, matchIndex = -1
+i = 18, matchIndex = -1
+i = 17, matchIndex = -1
+i = 16, matchIndex = -1
+i = 15, matchIndex = -1
+i = 14, matchIndex = -1
+i = 13, matchIndex = -1
+i = 12, matchIndex = -1
+i = 11, matchIndex = -1
+i = 10, matchIndex = -1
+i = 9, matchIndex = -1
+i = 8, matchIndex = -1
+i = 7, matchIndex = -1
+i = 6, matchIndex = -1
+i = 5, matchIndex = -1
+i = 4, matchIndex = -1
+i = 3, matchIndex = -1
+i = 2, matchIndex = -1
+I: 1
+i = 0, matchIndex = 18
+Length of evens: 1
+The char: G
+B: Failed Evense test
+B: MatchIndex 18
+Range length = 1
+Evanes string = mmmmmmrrrrrrr446::GG
+Evanes string = G9è¸

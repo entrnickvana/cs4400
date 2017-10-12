@@ -1,7 +1,8 @@
 Entered Main
-Type C_
+Type C_T
 ./a.out
 -c
+-t
 iiiiiiiii,Fsss_791FFF
 iiiiiiii,Bsss_148BBB
 iiiiiiii,AEEsss_781AEEAEEAEE
@@ -19,7 +20,7 @@ C : Length of String 21
 I: 1
 C: i = 21, matchIndex = 10
 Length of sequence 3x = 3
-yes
+iiiiiiiii,sss_791
 $$$  iiiiiiiii,Fsss_791FFF
 ////////////////////////////////////////
 
@@ -28,7 +29,7 @@ C : Length of String 20
 I: 1
 C: i = 19, matchIndex = 9
 Length of sequence 3x = 3
-yes
+iiiiiiii,Bsss_148BBB
 $$$  iiiiiiii,Bsss_148BBB
 ////////////////////////////////////////
 
@@ -37,7 +38,7 @@ C : Length of String 28
 I: 1
 C: i = 27, matchIndex = 9
 Length of sequence 3x = 3
-yes
+iiiiiiii,AEEsss_781AEEAEEAEE
 $$$  iiiiiiii,AEEsss_781AEEAEEAEE
 ////////////////////////////////////////
 
@@ -46,7 +47,7 @@ C : Length of String 34
 I: 1
 C: i = 33, matchIndex = 7
 Length of sequence 3x = 3
-yes
+iiiiii,GDEEGsss_854GDEEGGDEEGGDEEG
 $$$  iiiiii,GDEEGsss_854GDEEGGDEEGGDEEG
 ////////////////////////////////////////
 
@@ -55,7 +56,7 @@ C : Length of String 34
 I: 1
 C: i = 33, matchIndex = 7
 Length of sequence 3x = 3
-yes
+iiiiii,GGsss_391GGGGGG
 $$$  iiiiii,FGGFCsss_391FGGFCFGGFCFGGFC
 ////////////////////////////////////////
 
@@ -64,7 +65,7 @@ C : Length of String 24
 I: 1
 C: i = 23, matchIndex = 9
 Length of sequence 3x = 3
-yes
+iiiiiiii,Bsssssss_219BBB
 $$$  iiiiiiii,Bsssssss_219BBB
 ////////////////////////////////////////
 
@@ -73,7 +74,7 @@ C : Length of String 32
 I: 1
 C: i = 31, matchIndex = 9
 Length of sequence 3x = 3
-yes
+iiiiiiii,HBsssssss_857HBHBHB
 $$$  iiiiiiii,HBFsssssss_857HBFHBFHBF
 ////////////////////////////////////////
 
@@ -82,7 +83,7 @@ C : Length of String 41
 I: 1
 C: i = 41, matchIndex = 10
 Length of sequence 3x = 3
-yes
+iiiiiiiii,Gsssssss_613GGG
 $$$  iiiiiiiii,FGCCCsssssss_613FGCCCFGCCCFGCCC
 ////////////////////////////////////////
 
@@ -91,7 +92,7 @@ C : Length of String 18
 I: 1
 C: i = 17, matchIndex = 7
 Length of sequence 3x = 3
-yes
+iiiiii,Hsssss_6HHH
 $$$  iiiiii,Hsssss_6HHH
 ////////////////////////////////////////
 
@@ -100,7 +101,7 @@ C : Length of String 28
 I: 1
 C: i = 27, matchIndex = 7
 Length of sequence 3x = 3
-yes
+iiiiii,Gsssss_302GGG
 $$$  iiiiii,CFGsssss_302CFGCFGCFG
 ////////////////////////////////////////
 

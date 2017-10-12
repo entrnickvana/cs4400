@@ -1,0 +1,30 @@
+
+
+int mult(int a, int b){
+
+  return a*b;
+  
+}
+
+
+int div(int a, int b){
+
+  return a/b;
+  
+}
+
+#include <stdlib.h>
+#include "mult.h"
+#include "div.h"
+
+
+
+int main(int argc, char* argv[]){
+
+  int arg1 = atoi(argv[1]);
+  int arg2 = atoi(argv[2]);
+  int arg3 = atoi(argv[3]);
+
+  return (mult(div(arg1, arg2), arg3));
+  
+}

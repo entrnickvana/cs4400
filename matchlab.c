@@ -1,6 +1,6 @@
 
 
-
+//#define DEBUG 1
 #ifdef DEBUG
 # define DEBUG_PRINT(x) printf x
 #else
@@ -502,7 +502,7 @@ int matchB_Arg(char arr[])
 
 	int resultEvens = matchRange(evens_Of_X, nuIndex, arr);
 
-	if(resultEvens == 0)
+	if(resultEvens < 0)
 	{
 
 		DEBUG_PRINT(("B: Failed Evense test\n"));
