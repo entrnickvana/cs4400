@@ -82,6 +82,7 @@ static int check_chunk_hdr(void* bp, int hdr_ftr, size_t* size_sum , int* valid_
 static size_t calc_target();
 static int mm_check1();
 static int block_mapped1(void* p);
+static void *coalesce(void *bp);
 
 size_t size_target = 0;
 int target_count = 0;
@@ -281,8 +282,7 @@ while(current_chunk != NULL){
              if(FTRP(bp) < end_chunk_ptr){
                if(set_allocated(bp, new_size))
                  return bp;
-               break;
-             }
+               break;             }
            }
        }
   
@@ -373,12 +373,49 @@ void mm_free(void *ptr)
   4) attempts to unallocate something which isn't a previous givern bp
 
   */
-    
-  GET_ALLOC(HDRP(ptr)) = 0;
-  GET_ALLOC(FTRP(ptr)) = 0;
+
+   GET_ALLOC(HDRP(ptr)) = 0;
+   GET_ALLOC(FTRP(ptr)) = 0;
+   coalesce(ptr);
 
 
   return;
+}
+
+void *coalesce(void *bp) {
+
+ if(!ptr_is_mapped(HDRP(PREV_BLKP(bp)), BLK_HDR_SZ)) { if(debug_on) printf("coalesce, prev block hdr ptr unmapped\n"); return;  }
+ if(!ptr_is_mapped(HDRP(PREV_BLKP(bp)), GET_SIZE(HDRP(PREV_BLKP(bp))))) { if(debug_on) printf("coalesce, prev block (whole) hdr ptr unmapped\n"); return;  }
+ if(!ptr_is_mapped(FTRP(PREV_BLKP(bp)), BLK_HDR_SZ)) { if(debug_on) printf("coalesce, prev block ftr ptr unmapped\n"); return;  }
+
+
+ if(!ptr_is_mapped(HDRP(NEXT_BLKP(bp)), BLK_HDR_SZ)) { if(debug_on) printf("coalesce, next block hdr ptr unmapped\n"); return;  }
+ if(!ptr_is_mapped(HDRP(NEXT_BLKP(bp)), GET_SIZE(HDRP(NEXT_BLKP(bp))))) { if(debug_on) printf("coalesce, next block (whole) ptr unmapped\n"); return;  }
+ if(!ptr_is_mapped(FTRP(NEXT_BLKP(bp)), BLK_HDR_SZ)) { if(debug_on) printf("coalesce, next block ftr ptr unmapped\n"); return;  }
+
+ size_t prev_alloc = GET_ALLOC(HDRP(PREV_BLKP(bp)));
+ size_t next_alloc = GET_ALLOC(HDRP(NEXT_BLKP(bp)));
+ size_t size = GET_SIZE(HDRP(bp));
+ if (prev_alloc && next_alloc) { /* Case 1 */
+ /* nothing to do */
+ } else if (prev_alloc && !next_alloc) { /* Case 2 */
+ size += GET_SIZE(HDRP(NEXT_BLKP(bp)));
+ GET_SIZE(HDRP(bp)) = size;
+ GET_SIZE(FTRP(bp)) = size;
+ } else if (!prev_alloc && next_alloc) { /* Case 3 */
+ size += GET_SIZE(HDRP(PREV_BLKP(bp)));
+ GET_SIZE(FTRP(bp)) = size;
+ GET_SIZE(HDRP(PREV_BLKP(bp))) = size;
+ bp = PREV_BLKP(bp);
+ }else { /* Case 4 */
+ size += (GET_SIZE(HDRP(PREV_BLKP(bp)))
+ + GET_SIZE(HDRP(NEXT_BLKP(bp))));
+ GET_SIZE(HDRP(PREV_BLKP(bp))) = size;
+ GET_SIZE(FTRP(NEXT_BLKP(bp))) = size;
+ bp = PREV_BLKP(bp);
+ }
+
+ 
 }
 
 /*
@@ -393,10 +430,10 @@ int mm_check()
   block_header* chunk_prolog_footer = (block_header*)((void*)chunk_prolog_header + BLK_HDR_SZ);
   list_node* lnode1 = (list_node*)((void*)first_bp - (5*BLK_HDR_SZ) );
   list_node* lnode2 = (list_node*)((void*)first_bp - (4*BLK_HDR_SZ) );
-  if(GET_ALLOC(chunk_prolog_header) == 0) {printf("chnk prolog hdr size == 0\n"); scanf("%c", &in); }
-  if(GET_ALLOC(chunk_prolog_footer) == 0) {printf("chnk prolog ftr size == 0\n"); scanf("%c", &in); }
-  if(GET_SIZE(chunk_prolog_header) != 32) {printf("chnk prolog hdr size != 32\n"); scanf("%c", &in); }    
-  if(GET_SIZE(chunk_prolog_footer) != 32) {printf("chnk prolog ftr chunk != 32\n"); scanf("%c", &in); }  
+  if(GET_ALLOC(chunk_prolog_header) == 0) { if(debug_on) {printf("chnk prolog hdr size == 0\n"); scanf("%c", &in);  }}
+  if(GET_ALLOC(chunk_prolog_footer) == 0) { if(debug_on) {printf("chnk prolog ftr size == 0\n"); scanf("%c", &in);  }}
+  if(GET_SIZE(chunk_prolog_header) != 32) { if(debug_on) {printf("chnk prolog hdr size != 32\n"); scanf("%c", &in); } }    
+  if(GET_SIZE(chunk_prolog_footer) != 32) { if(debug_on) {printf("chnk prolog ftr chunk != 32\n"); scanf("%c", &in); } }  
 
 
 
@@ -521,12 +558,12 @@ static int sum_blocks_chunks(void* p, int print_on)
 
 static int block_mapped1(void* p){
 
-  if(!ptr_is_mapped(p , sizeof(block_header))) { printf("FAILED BLOCK IS MAPPED BP\n"); return 0; }
-  if(!ptr_is_mapped(HDRP(p) , sizeof(block_header))) { printf("FAILED BLOCK IS MAPPED HDRP(BP)\n"); return 0; }  
+  if(!ptr_is_mapped(p , sizeof(block_header))) { if(debug_on) printf("FAILED BLOCK IS MAPPED BP\n"); return 0; }
+  if(!ptr_is_mapped(HDRP(p) , sizeof(block_header))) { if(debug_on) printf("FAILED BLOCK IS MAPPED HDRP(BP)\n"); return 0; }  
   if(GET_SIZE(HDRP(p)) == 0){
-    if(!ptr_is_mapped(HDRP(p), sizeof(block_header) )) { printf("FAILED BLOCK IS MAPPED WHOLE BLOCK, \n"); return 0; }
+    if(!ptr_is_mapped(HDRP(p), sizeof(block_header) )) { if(debug_on) printf("FAILED BLOCK IS MAPPED WHOLE BLOCK, \n"); return 0; }
   }else{
-    if(!ptr_is_mapped(HDRP(p), GET_SIZE(HDRP(p)))) { printf("FAILED BLOCK IS MAPPED WHOLE BLOCK, \n"); return 0; }
+    if(!ptr_is_mapped(HDRP(p), GET_SIZE(HDRP(p)))) { if(debug_on) printf("FAILED BLOCK IS MAPPED WHOLE BLOCK, \n"); return 0; }
   }
 
   return 1;
@@ -534,16 +571,16 @@ static int block_mapped1(void* p){
 
 static int block_mapped(void* p){
 
-  if(!ptr_is_mapped(p, sizeof(block_header))) { printf("FAILED BLOCK IS MAPPED\n"); dbg_data(); return 0; }
-  if(!ptr_is_mapped(p, GET_SIZE(HDRP(p)))) { printf("FAILED BLOCK IS MAPPED, \n"); dbg_data(); return 0; }
+  if(!ptr_is_mapped(p, sizeof(block_header))) { if(debug_on) { printf("FAILED BLOCK IS MAPPED\n"); dbg_data(); } return 0; }
+  if(!ptr_is_mapped(p, GET_SIZE(HDRP(p)))) { if(debug_on) { printf("FAILED BLOCK IS MAPPED, \n"); dbg_data(); } return 0; }
   return 1;
 }
 
 static int block_unequal(void* bp){
   int result = 1;
   if(!block_mapped(bp)) {result = 0;} 
-  if(GET_SIZE(HDRP(bp)) != GET_SIZE(FTRP(bp))) { printf("FAILED BLOCK IS EQUAL, SIZE\n"); dbg_data(); return 0; }
-  if(GET_ALLOC(HDRP(bp)) != GET_ALLOC(FTRP(bp))) { printf("FAILED BLOCK IS EQUAL, ALLOC\n"); dbg_data(); return 0; }    
+  if(GET_SIZE(HDRP(bp)) != GET_SIZE(FTRP(bp))) { if(debug_on) {printf("FAILED BLOCK IS EQUAL, SIZE\n"); dbg_data();  } return 0; }
+  if(GET_ALLOC(HDRP(bp)) != GET_ALLOC(FTRP(bp))) { if(debug_on) {printf("FAILED BLOCK IS EQUAL, ALLOC\n"); dbg_data(); }  return 0; }    
   return result;
 }
 
