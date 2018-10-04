@@ -38,6 +38,8 @@ int get_sym_arr_count(Elf64_Ehdr *ehdr);
 void print_decode(int sym_indx);
 void fix(Elf64_Ehdr *ehdr);
 Elf64_Sym* sym_by_index(Elf64_Ehdr* ehdr, int index, char* nameOfSymSection);
+int print_ins_info(Elf64_Ehdr* ehdr, instruction_t* ins);
+void print_mach_code(unsigned char* code_ptr, instruction_t ins);
 
 // ADDED FUNCTIONS
 
@@ -80,37 +82,63 @@ void fix(Elf64_Ehdr *ehdr)
 {
 
     Elf64_Sym* syms = get_sym_arr(ehdr);
-
-    int m;
-    int count = get_sym_arr_count(ehdr);
-    // decode(instruction_t *ins, code_t *code_ptr, Elf64_Addr code_addr)    
+    int m, count = get_sym_arr_count(ehdr);
     instruction_t ins;
     unsigned char* code_ptr;       // in memory, red
-    Elf64_Addr code_addr;   // at runtime, green 
+    Elf64_Addr code_addr;
     int sec_lvl;
     int len = 0;
-    Elf64_Sym* temp_sym;
-
-    int k;
-    for(k = 0; k < count; ++k)
-      {printf("%d\t", k); p_sym(ehdr, k);}
 
     for(m = 0; m < count; ++m){
-      p_sym(ehdr, m);
-      sec_lvl = get_secrecy_level(p_sym(ehdr, m));
-      printf("INDEX: %d\n", m);
-      code_ptr = get_code_addr(ehdr, m);
-      temp_sym = &syms[m];
-      code_addr = temp_sym->st_value; // SEG FAULT
-      decode(&ins, code_ptr, code_addr);  // SEG FAULTING
-      printf("INS LENGTH: %d\n", ins.length);
 
-      int i;
-      for(i = 0; i < ins.length; ++i)
-        printf("%hhu\n", *(code_ptr + i));
+      if(p_sym(ehdr, m)[0] == 'f'){
+          sec_lvl = get_secrecy_level(p_sym(ehdr, m));      
+          printf("m: %d\t sec: %d\n\n", m, sec_lvl);      
+  
+          code_ptr = get_code_addr(ehdr, m);       // in memory, red
+          code_addr = syms[m].st_value;   // at runtime, green 
+  
+          do{
+              decode(&ins, code_ptr, code_addr); 
+              print_ins_info(ehdr, &ins);
+  
+              if(ins.op == 0)       
+              {}
+              else if(ins.op == 1)  {}
+              else if(ins.op == 2)  {}
+              else if(ins.op == 3)  {}
+              else if(ins.op == 4)  {}
+  
+              code_ptr = code_ptr + ins.length;
+  
+          }while(ins.op != 3);
+        
+      }
 
     }
 
+}
+
+void print_mach_code(unsigned char* code_ptr, instruction_t ins)
+{
+  int i;
+  for(i = 0; i < ins.length; ++i)
+    printf("%02hhx ", *(code_ptr + i));
+  printf("\n");
+
+}
+
+int print_ins_info(Elf64_Ehdr* ehdr, instruction_t* ins)
+{
+  printf("\nTHE DECODED INSTRUCTION WAS INTERPRETED AS:\n--------------------------\n");
+  switch(ins->op)
+  {
+    case 0: printf("OP:\tMOV_ADDR_TO_REG_OP\t\tLENGTH: %d\t\tADDR: %llu\n\n", ins->length, (long long unsigned int)ins->mov_addr_to_reg.addr );break;
+    case 1: printf("OP:\tJMP_TO_ADDR_OP\t\tLENGTH: %d\t\tADDR: %llu\n\n", ins->length, (long long unsigned int)ins->jmp_to_addr.addr);break;
+    case 2: printf("OP:\tMAYBE_JMP_TO_ADDR_OP\t\tLENGTH: %d\t\tADDR: %llu\n\n", ins->length,(long long unsigned int) ins->maybe_jmp_to_addr.addr );break;
+    case 3: printf("OP:\tRET_OP\t\tLENGTH: %d\t\tADDR: NA\n\n", ins->length );break;
+    case 4: printf("OP:\tOTHER_OP\t\tLENGTH: %d\t\tADDR: NA\n\n", ins->length );break;
+  }
 }
 
 
@@ -141,9 +169,9 @@ char* p_sym(Elf64_Ehdr* ehdr, int indx)
 
     Elf64_Shdr *dynsym_shdr = section_by_name(ehdr, ".dynsym");
     Elf64_Sym *syms = AT_SEC(ehdr, dynsym_shdr);
-    char *strs = AT_SEC(ehdr, section_by_name(ehdr, ".dynstr"));
+    const char *strs = AT_SEC(ehdr, section_by_name(ehdr, ".dynstr"));
     printf("%s\n", strs + syms[indx].st_name);
-    return strs;
+    return (const char*)(strs + syms[indx].st_name);
 }
 
 
