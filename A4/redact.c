@@ -10,26 +10,28 @@
 #include <elf.h>
 #include "decode.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #ifdef DEBUG
 # define DEBUG_PRINT(x) printf x
 #else
 # define DEBUG_PRINT(x) do {} while (0)
 #endif
 
-/* Given the in-memory ELF header pointer as `ehdr` and a section
-   header pointer as `shdr`, returns a pointer to the memory that
-   contains the in-memory content of the section */
-
+/*
+  Given the in-memory ELF header pointer as `ehdr` and a section
+  header pointer as `shdr`, returns a pointer to the memory that
+  contains the in-memory content of the section 
+*/
 
 #define AT_SEC(ehdr, shdr) ((void *)(ehdr) + (shdr)->sh_offset)
+#define ELF64_R_SYM_1(r_info) ((r_info) >> 32)
 
 static int get_secrecy_level(const char *s); /* foward declaration */
 
 // ADDED FUNCTIONS
 void p_shdrs(Elf64_Ehdr*  ehdr);
 void p_syms(Elf64_Ehdr* ehdr);
-char* p_sym(Elf64_Ehdr* ehdr, int indx);
+char* p_sym(Elf64_Ehdr* ehdr, int indx, int on_off);
 Elf64_Shdr *section_by_index(Elf64_Ehdr *ehdr, int idx);
 Elf64_Shdr *section_by_name(Elf64_Ehdr *ehdr, char *name);
 unsigned char* get_code_addr(Elf64_Ehdr *ehdr, int sym_indx);
@@ -40,6 +42,8 @@ void fix(Elf64_Ehdr *ehdr);
 Elf64_Sym* sym_by_index(Elf64_Ehdr* ehdr, int index, char* nameOfSymSection);
 int print_ins_info(Elf64_Ehdr* ehdr, instruction_t* ins);
 void print_mach_code(unsigned char* code_ptr, instruction_t ins);
+void print_rela(Elf64_Ehdr *ehdr);
+int rela_idx(Elf64_Ehdr *ehdr, Elf64_Addr code_addr);
 
 // ADDED FUNCTIONS
 
@@ -47,10 +51,17 @@ void print_mach_code(unsigned char* code_ptr, instruction_t ins);
 
 void redact(Elf64_Ehdr *ehdr) 
 {
-  //p_shdrs(ehdr); // print shdrs
-  //p_syms(ehdr);
   fix(ehdr);
+}
 
+void print_rela_str(Elf64_Ehdr *ehdr, int k)
+{
+  int m = -1;
+  Elf64_Shdr *rela_dyn_shdr = section_by_name(ehdr, ".rela.dyn");
+  Elf64_Rela *relas = AT_SEC(ehdr, rela_dyn_shdr);
+
+  m = ELF64_R_SYM(relas[k].r_info);
+  p_sym(ehdr, k, 1);
 }
 
 Elf64_Sym* get_sym_arr(Elf64_Ehdr *ehdr)
@@ -60,6 +71,39 @@ Elf64_Sym* get_sym_arr(Elf64_Ehdr *ehdr)
     return syms;
 }
 
+void print_rela(Elf64_Ehdr *ehdr)
+{
+
+  printf("\n\n\n+++++++++++++++++++++++   RELAS   ++++++++++++++++++++++++++++\n\n");
+  Elf64_Shdr *rela_dyn_shdr = section_by_name(ehdr, ".rela.dyn");
+  Elf64_Rela *relas = AT_SEC(ehdr, rela_dyn_shdr);
+  int i, count = rela_dyn_shdr->sh_size / sizeof(Elf64_Rela);
+  for (i = 0; i < count; i++) {
+    printf("%d\n", ELF64_R_SYM_1(relas[i].r_info));
+  }
+  printf("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n\n");  
+}
+
+int rela_idx(Elf64_Ehdr *ehdr, Elf64_Addr code_addr)
+{
+  Elf64_Shdr *rela_dyn_shdr = section_by_name(ehdr, ".rela.dyn");
+  Elf64_Rela *relas = AT_SEC(ehdr, rela_dyn_shdr);
+  int k, count = rela_dyn_shdr->sh_size / sizeof(Elf64_Rela);
+  Elf64_Addr rela_addr = 0;
+  int var_addr_idx = -1;
+  for (k = 0; k < count; k++) {
+    rela_addr = relas[k].r_offset;
+    if(code_addr == rela_addr)
+    { printf("\n\n\n\n---------------------------------\nMATCHED ADDRESS FOR VAR, IDX K: %d \n\n\n", k); var_addr_idx = k;}
+    else
+    { 
+      if(0) { printf("[ UNMATCHED ] K:%d \n\tcode_addr: %d \n\trela_addr: %d \n", k, code_addr, rela_addr);}
+      if(0) { printf("\tDIFF: \t\t%d\n", code_addr - rela_addr);                                           }
+    }
+  }
+  return var_addr_idx;
+}
+
 int get_sym_arr_count(Elf64_Ehdr *ehdr)
 {
     Elf64_Shdr *dynsym_shdr = section_by_name(ehdr, ".dynsym");
@@ -67,6 +111,7 @@ int get_sym_arr_count(Elf64_Ehdr *ehdr)
     int count = dynsym_shdr->sh_size / sizeof(Elf64_Sym);
     return count;
 }
+
 
 unsigned char* get_code_addr(Elf64_Ehdr *ehdr, int sym_indx)
 {
@@ -80,41 +125,69 @@ unsigned char* get_code_addr(Elf64_Ehdr *ehdr, int sym_indx)
 
 void fix(Elf64_Ehdr *ehdr)
 {
-
+    p_syms(ehdr);
+    print_rela(ehdr);
     Elf64_Sym* syms = get_sym_arr(ehdr);
     int m, count = get_sym_arr_count(ehdr);
     instruction_t ins;
     unsigned char* code_ptr;       // in memory, red
     Elf64_Addr code_addr;
     int sec_lvl;
-    int len = 0;
+    int k = 0;
 
     for(m = 0; m < count; ++m){
 
-      if(p_sym(ehdr, m)[0] == 'f'){
-          sec_lvl = get_secrecy_level(p_sym(ehdr, m));      
+      if(p_sym(ehdr, m, 0)[0] == 'f'){
+          sec_lvl = get_secrecy_level(p_sym(ehdr, m, 0));      
           printf("m: %d\t sec: %d\n\n", m, sec_lvl);      
   
           code_ptr = get_code_addr(ehdr, m);       // in memory, red
-          code_addr = syms[m].st_value;   // at runtime, green 
+          code_addr = syms[m].st_value;            // at runtime, green 
   
           do{
               decode(&ins, code_ptr, code_addr); 
               print_ins_info(ehdr, &ins);
   
               if(ins.op == 0)       
-              {}
-              else if(ins.op == 1)  {}
-              else if(ins.op == 2)  {}
-              else if(ins.op == 3)  {}
-              else if(ins.op == 4)  {}
+              { 
+                printf("OP: 0\n");
+                code_addr = ins.mov_addr_to_reg.addr;
+                k = rela_idx(ehdr, code_addr); 
+                printf("((((((((((((((  MATCH  ))))))))))))))))))))\n\n");
+                print_rela_str(ehdr, k);
+                printf("((((((((((((((  MATCH  ))))))))))))))))))))\n\n\n\n");                
+              }
+              else if(ins.op == 1)
+              /*
+                JMP_TO_ADDR_OP — The instruction jumps to a constant address, possibly as a tail call to an global function.
+                The ins->addr field is set to the destination of the jump as a run-time address,
+                and it’s a call to a global function if that address corresponds to a function that is registered as a dynamic symbol.
+                The instruction after the jump need not be considered, unless it is reached through some other jump.
+              */
+              {   //  JMP_TO_ADDR_OP
+
+              }
+              else if(ins.op == 2){   //  MAYBE_JMP_TO_ADDR_OP
+
+              }
+              else if(ins.op == 3){   //  RET_OP
+
+              }
+              else if(ins.op == 4){   //  OTHER_OP
+
+              }
   
               code_ptr = code_ptr + ins.length;
+              code_addr+= ins.length;
   
           }while(ins.op != 3);
         
       }
+      else if(p_sym(ehdr,m, 0)[0] == 'a'){
+          sec_lvl = get_secrecy_level(p_sym(ehdr, m, 0));      
+          printf("VARIABLE: \nm: %d\t sec: %d\n\n", m, sec_lvl);  
 
+      }
     }
 
 }
@@ -139,38 +212,44 @@ int print_ins_info(Elf64_Ehdr* ehdr, instruction_t* ins)
     case 3: printf("OP:\tRET_OP\t\tLENGTH: %d\t\tADDR: NA\n\n", ins->length );break;
     case 4: printf("OP:\tOTHER_OP\t\tLENGTH: %d\t\tADDR: NA\n\n", ins->length );break;
   }
-}
 
+  return 0;
+}
 
 void p_syms(Elf64_Ehdr* ehdr)
 {
+
   DEBUG_PRINT(("------------------------------DYN SYMBOL NAMES------------------------\n"));
     Elf64_Shdr *dynsym_shdr = section_by_name(ehdr, ".dynsym");
     Elf64_Sym *syms = AT_SEC(ehdr, dynsym_shdr);
     char *strs = AT_SEC(ehdr, section_by_name(ehdr, ".dynstr"));
     int i, count = dynsym_shdr->sh_size / sizeof(Elf64_Sym);
     for (i = 0; i < count; i++) 
-      printf("%s\n", strs + syms[i].st_name);
-  
-DEBUG_PRINT(("------------------------------DYN SYMBOL NAMES------------------------\n"));  
-DEBUG_PRINT(("------------------------------SYMBOL NAMES------------------------\n"));
-  
-    Elf64_Shdr *sym_shdr = section_by_name(ehdr, ".symtab");
-    syms = AT_SEC(ehdr, sym_shdr);
-    strs = AT_SEC(ehdr, section_by_name(ehdr, ".strtab"));
-    count = sym_shdr->sh_size / sizeof(Elf64_Sym);
-    for (i = 0; i < count; i++) 
-      printf("%s\n", strs + syms[i].st_name);
-  DEBUG_PRINT(("-------------------------------SYMBOL NAMES------------------------\n"));
+      printf("--> %s\n", strs + syms[i].st_name);
+  DEBUG_PRINT(("------------------------------DYN SYMBOL NAMES------------------------\n\n\n"));  
+
+  if(0)
+  {
+    DEBUG_PRINT(("------------------------------SYMBOL NAMES------------------------\n"));
+    
+      Elf64_Shdr *sym_shdr = section_by_name(ehdr, ".symtab");
+      syms = AT_SEC(ehdr, sym_shdr);
+      strs = AT_SEC(ehdr, section_by_name(ehdr, ".strtab"));
+      count = sym_shdr->sh_size / sizeof(Elf64_Sym);
+      for (i = 0; i < count; i++) 
+        printf("--> %s\n", strs + syms[i].st_name);
+    DEBUG_PRINT(("-------------------------------SYMBOL NAMES------------------------\n\n\n"));
+  }
 }
 
-char* p_sym(Elf64_Ehdr* ehdr, int indx)
+char* p_sym(Elf64_Ehdr* ehdr, int indx, int on_off)
 {
 
     Elf64_Shdr *dynsym_shdr = section_by_name(ehdr, ".dynsym");
     Elf64_Sym *syms = AT_SEC(ehdr, dynsym_shdr);
     const char *strs = AT_SEC(ehdr, section_by_name(ehdr, ".dynstr"));
-    printf("%s\n", strs + syms[indx].st_name);
+
+    if(on_off)  { printf("-->  %s\n", strs + syms[indx].st_name);   }
     return (const char*)(strs + syms[indx].st_name);
 }
 
