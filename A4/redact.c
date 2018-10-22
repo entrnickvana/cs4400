@@ -142,19 +142,20 @@ void fix(Elf64_Ehdr *ehdr)
     int m, count = get_sym_arr_count(ehdr);
     instruction_t ins;
     instruction_t prev_ins;
+    instruction_t prev_func;
     unsigned char* code_ptr;       // in memory, red
     Elf64_Addr code_addr;
     Elf64_Addr code_addr2 = NULL;
     int sec_lvl;
     int k = 0;
+    int level = 0;
     int plt_indx = p_shdrs(ehdr, ".plt", 0);
+    int text_indx = p_shdrs(ehdr, ".text", 0);
     Elf64_Shdr *shdrs = (void*)ehdr+ehdr->e_shoff;
 
     for(m = 0; m < count; ++m){
-
-        curr_sym = syms[m];
-
         if(ELF64_ST_TYPE1(syms[m].st_info) == STT_FUNC && syms[m].st_size > 0){
+          printf("\n_____________________________ ENTERING FUNCTION:  %s _______________________________\n", p_sym(ehdr, m, 0));
 
           sec_lvl = get_secrecy_level(p_sym(ehdr, m, 0));      
           printf("m: %d\t sec: %d\n\n", m, sec_lvl);      
@@ -182,73 +183,38 @@ void fix(Elf64_Ehdr *ehdr)
                   printf(" ))))))))))) NO MATCH ((((((((((\n");
 
               }
-              else if(ins.op == 1)
-              /*
-                JMP_TO_ADDR_OP — The instruction jumps to a constant address, possibly as a tail call to an global function.
-                The ins->addr field is set to the destination of the jump as a run-time address,
-                and it’s a call to a global function if that address corresponds to a function that is registered as a dynamic symbol.
-                The instruction after the jump need not be considered, unless it is reached through some other jump.
-              */
-              {   //  JMP_TO_ADDR_OP
+              else if(ins.op == 1){   //  JMP_TO_ADDR_OP
+                printf("OP: 1\n");                
 
+                prev_func = prev_ins;
                 code_addr = ins.jmp_to_addr.addr;
-                printf("$$$$$$$$$ $$$$$$$ $$$$$$ Maybe JMP ADDR\t%d\n", code_addr - section_by_name(ehdr, ".rela.plt")->sh_addr);
-
                 code_ptr = AT_SEC(ehdr, shdrs + plt_indx) + (code_addr - section_by_name(ehdr, ".rela.plt")->sh_addr);
-
-                printf("\n\n\nENTERING SECONDARY JMP\n>>>\n>>>\n>>>\n\n\n");     
-
                 decode(&ins, code_ptr, code_addr);
-
                 print_ins_info(ehdr, &ins);                
-
-                
 
                 k = rela_idx(ehdr, code_addr, 1); 
 
                 if(k > -1)
-                {
-                  printf("<<<<<<<<<<<<<<< MATCH  >>>>>>>>>>>>>>>>>>>>>>>>\n\n");                                  
-                  printf("K: %d\n", k);
-                  printf("<<<<<<<<<<<<<<< MATCH  >>>>>>>>>>>>>>>>>>>>>>>>\n\n");      
-                }            
+                  printf("<<<<<<<<<<<<<<<<<<<<<<<<<<< K: %d\n", k);
                 else        
                   printf("@@@ NO K MATCH FOUND @@@\n");
 
-                
-
               }
-              /*
-                MAYBE_JMP_TO_ADDR_OP — The instruction conditionally jumps to a constant address,
-                most likely due to an if in the original program. 
-                The ins->addr field is set to the destination of the jump as a run-time address.
-                This jump is never a call to a function, 
-                but the code at the target of the jump may go on to call a function or access a variable.
-                If the jump is not taken,
-                the immediately following instructions might access a variable or call a function.
-              */
               else if(ins.op == 2){   //  MAYBE_JMP_TO_ADDR_OP
-
                 printf("OP: 2\n");
 
+                code_addr = ins.maybe_jmp_to_addr.addr;
+                code_ptr = AT_SEC(ehdr, shdrs + text_indx) + (code_addr - section_by_name(ehdr, ".text")->sh_addr);
+                decode(&ins, code_ptr, code_addr);
+                print_ins_info(ehdr, &ins);                
 
               }
-              /*
-                RET_OP — The instruction returns from the current function,
-                so the instruction after the return need not be considered,
-                unless it is reached through an earlier jump.
-                The ins->addr field is not set.
-              */
               else if(ins.op == 3){   //  RET_OP
-                ins = prev_ins;
-                if     (ins.op == 0)  {code_addr = ins.mov_addr_to_reg.addr;      }//  mov_addr_to_reg_op
-                else if(ins.op == 1)  {code_addr = ins.jmp_to_addr.addr;          }//  jmp_to_addr_op
-                else if(ins.op == 2)  {code_addr = ins.maybe_jmp_to_addr.addr;    }//  maybe_jmp_to_addr_op
-                else if(ins.op == 3)  {                                           }//  ret_op
-                else if(ins.op == 4)  {                                           }//  other_op
+                printf("OP: 3\n");
 
               }
               else if(ins.op == 4){   //  OTHER_OP
+                printf("OP: 4\n");                
 
               }
 
@@ -257,13 +223,9 @@ void fix(Elf64_Ehdr *ehdr)
 
           }while(ins.op != 3);
         
-      }
-      else if(p_sym(ehdr,m, 0)[0] == 'a'){
-          sec_lvl = get_secrecy_level(p_sym(ehdr, m, 0));      
-          printf("VARIABLE: \nm: %d\t sec: %d\n\n", m, sec_lvl);  
+      } else {}
 
-      }
-    }
+    }// END FOR M
 
 }
 
