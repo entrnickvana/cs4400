@@ -195,12 +195,20 @@ void fix(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* code_ptr, Elf64_Ad
 void mov_addr_to_reg_func(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* code_ptr, Elf64_Addr code_addr)
 {
 
+  Elf64_Shdr *rela_dyn_shdr = section_by_name(ehdr, ".rela.dyn");
+  Elf64_Rela *relas = AT_SEC(ehdr, rela_dyn_shdr);
+
   int k;
   k = rela_idx(ehdr, ins->mov_addr_to_reg.addr, 0); 
 
-  if(k >= 0)    print_rela_str(ehdr, k);
-  else          printf(" ))))))))))) NO MATCH ((((((((((\n");
 
+  int m;
+  m = ELF64_R_SYM(relas[k].r_info);
+  if(k >= 0){
+    printf("VAR MATCH !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"); 
+    print_rela_str(ehdr, m);
+  }    
+  
   code_ptr+= ins->length;
   code_addr+= ins->length;        
 
@@ -270,17 +278,6 @@ void maybe_jmp_func(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* code_pt
   int j = p_shdrs(ehdr, ".text", 0);
   unsigned char* branch_code = AT_SEC(ehdr, shdrs + j) + (ins->maybe_jmp_to_addr.addr - shdrs[j].sh_addr);
 
-
-
-  /*
-  printf("SECTION ADDR PTR: %p\n", AT_SEC(ehdr, shdrs + j));
-
-  printf("SECTION ADDR DEC: %d\n", AT_SEC(ehdr, shdrs + j));
-
-  printf("RELATIVE DIFF: %d\n", ins->maybe_jmp_to_addr.addr - shdrs[j].sh_addr);
-
-  printf("BRANCH CODE ADDR: %d\n", branch_code);
-  */
 
   printf("ENTERING BRANCH       ////////////////////////////////\n");
 
