@@ -46,6 +46,7 @@ int print_ins_info(Elf64_Ehdr* ehdr, instruction_t* ins);
 void print_mach_code(unsigned char* code_ptr, instruction_t ins);
 void print_rela(Elf64_Ehdr *ehdr);
 int rela_idx(Elf64_Ehdr *ehdr, Elf64_Addr code_addr, int plt);
+unsigned char* p_sect_addr(Elf64_Ehdr *ehdr);
 
 void mov_addr_to_reg_func(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* code_ptr, Elf64_Addr code_addr);
 void jmp_to_addr_func(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* code_ptr, Elf64_Addr code_addr);
@@ -62,6 +63,8 @@ void fix_all(Elf64_Ehdr *ehdr);
 void redact(Elf64_Ehdr *ehdr) 
 {
   p_shdrs(ehdr, NULL, 1);
+  p_sect_addr(ehdr);
+  p_syms(ehdr);
   fix_all(ehdr);
 }
 
@@ -137,6 +140,17 @@ unsigned char* get_code_addr(Elf64_Ehdr *ehdr, int sym_indx)
   return code;
 }
 
+unsigned char* p_sect_addr(Elf64_Ehdr *ehdr)
+{
+  Elf64_Shdr *shdrs = (void*)ehdr+ehdr->e_shoff;
+  int i;
+  for (i = 0; i < ehdr->e_shnum; i++) {
+
+    printf("IDX: %d\t\tRUNTIME ADDR:  %d\t\t MEM OFFSTE: %d\t\n", i, shdrs[i].sh_addr, shdrs[i].sh_offset);
+  }
+
+}
+
 void fix_all(Elf64_Ehdr *ehdr)
 {
   int m, count = get_sym_arr_count(ehdr);  
@@ -196,14 +210,42 @@ void mov_addr_to_reg_func(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* c
 
 void jmp_to_addr_func(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* code_ptr, Elf64_Addr code_addr)
 {
-  int k = -1;
-  k = rela_idx(ehdr, ins->jmp_to_addr.addr, 1); 
 
-  if(k > -1)
+
+  instruction_t new_ins;
+
+  Elf64_Shdr *rela_plt_shdr = section_by_name(ehdr, ".rela.plt");
+  Elf64_Rela *relas = AT_SEC(ehdr, rela_plt_shdr);
+
+  int j;
+  Elf64_Shdr *shdrs = (void*)ehdr+ehdr->e_shoff;
+
+  j = 10;  // plt indx
+
+  unsigned char* new_code = AT_SEC(ehdr, shdrs + j) + (ins->jmp_to_addr.addr - shdrs[j].sh_addr);
+
+  printf("SECOND DECODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+
+  decode(&new_ins, new_code, ins->jmp_to_addr.addr);
+  print_ins_info(ehdr, &new_ins);
+
+  int k = -1;
+  k = rela_idx(ehdr, new_ins.jmp_to_addr.addr, 1); 
+  int m = -1;
+
+
+  m = ELF64_R_SYM(relas[k].r_info);
+  printf("M = %d\n", m);
+
+  if(k > -1){
     printf("<<<<<<<<<<<<<<<<<<<<<<<<<<< K: %d\n", k);
-  else        
+    p_sym(ehdr, m, 1);
+  }
+
+  else
     printf("@@@ NO K MATCH FOUND @@@\n");
-  
+
+
 
   code_ptr+= ins->length;
   code_addr+= ins->length;        
@@ -228,7 +270,17 @@ void maybe_jmp_func(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* code_pt
   int j = p_shdrs(ehdr, ".text", 0);
   unsigned char* branch_code = AT_SEC(ehdr, shdrs + j) + (ins->maybe_jmp_to_addr.addr - shdrs[j].sh_addr);
 
+
+
+  /*
+  printf("SECTION ADDR PTR: %p\n", AT_SEC(ehdr, shdrs + j));
+
+  printf("SECTION ADDR DEC: %d\n", AT_SEC(ehdr, shdrs + j));
+
+  printf("RELATIVE DIFF: %d\n", ins->maybe_jmp_to_addr.addr - shdrs[j].sh_addr);
+
   printf("BRANCH CODE ADDR: %d\n", branch_code);
+  */
 
   printf("ENTERING BRANCH       ////////////////////////////////\n");
 
