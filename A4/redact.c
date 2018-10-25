@@ -56,6 +56,8 @@ void other_op_func(Elf64_Ehdr *ehdr, instruction_t* ins, unsigned char* code_ptr
 
 void fix_all(Elf64_Ehdr *ehdr);
 
+int p_lvl = 1;
+
 // ADDED FUNCTIONS
 
 /*************************************************************/
@@ -112,11 +114,11 @@ int rela_idx(Elf64_Ehdr *ehdr, Elf64_Addr code_addr, int plt)
   for (k = 0; k < count; k++) {
     rela_addr = relas[k].r_offset;
     if(code_addr == rela_addr)
-    { printf("\n\n\n\n---------------------------------\nMATCHED ADDRESS FOR VAR, IDX K: %d \n\n\n", k); var_addr_idx = k;}
+    { printf("\nMATCHED ADDRESS FOR VAR, IDX K: %d \n", k); var_addr_idx = k;}
     else
     { 
-      if(1) { printf("[ UNMATCHED ] K:%d \n\tcode_addr: %d \n\trela_addr: %d \n", k, code_addr, rela_addr);}
-      if(1) { printf("\tDIFF: \t\t%d\n", code_addr - rela_addr);                                           }
+      if(0) { printf("[ UNMATCHED ] K:%d \n\tcode_addr: %d \n\trela_addr: %d \n", k, code_addr, rela_addr);}
+      if(0) { printf("\tDIFF: \t\t%d\n", code_addr - rela_addr);                                           }
     }
   }
   return var_addr_idx;
@@ -160,6 +162,7 @@ void fix_all(Elf64_Ehdr *ehdr)
   int text_indx = p_shdrs(ehdr, ".text", 0);
   Elf64_Shdr *shdrs = (void*)ehdr+ehdr->e_shoff;
   instruction_t ins;
+  int s_lvl;
 
   //int sec_lvl = get_secrecy_level(p_sym(ehdr, m, 0));      
   unsigned char* code_ptr; 
@@ -167,13 +170,16 @@ void fix_all(Elf64_Ehdr *ehdr)
 
   for(m = 0; m < count; ++m){
 
-    printf("SYMBOL M: %d\n", m);
+    if(m != 6){
+    printf("______________________________ ENTERING SYMBOL M: %d _______________________________\n", m);
+    printf("FUNCTION NAME:\t");
     p_sym(ehdr, m, 1);
     code_ptr = get_code_addr(ehdr, m);    // in memory, red
     code_addr = syms[m].st_value;        // at runtime, green 
 
     if(ELF64_ST_TYPE1(syms[m].st_info) == STT_FUNC && syms[m].st_size > 0)
       fix(ehdr, &ins, code_ptr, code_addr);
+    }
   }        
 
 }
@@ -321,14 +327,14 @@ void print_mach_code(unsigned char* code_ptr, instruction_t ins)
 
 int print_ins_info(Elf64_Ehdr* ehdr, instruction_t* ins)
 {
-  printf("\nTHE DECODED INSTRUCTION WAS INTERPRETED AS:\n--------------------------\n");
+  printf("\nINTERPRETED INSTRUCTION -------------------------------------------------------\n");
   switch(ins->op)
   {
-    case 0: printf("OP:\tMOV_ADDR_TO_REG_OP\t\tLENGTH: %d\t\tADDR: %llu\n\n", ins->length, (long long unsigned int)ins->mov_addr_to_reg.addr );break;
-    case 1: printf("OP:\tJMP_TO_ADDR_OP\t\tLENGTH: %d\t\tADDR: %llu\n\n", ins->length, (long long unsigned int)ins->jmp_to_addr.addr);break;
-    case 2: printf("OP:\tMAYBE_JMP_TO_ADDR_OP\t\tLENGTH: %d\t\tADDR: %llu\n\n", ins->length,(long long unsigned int) ins->maybe_jmp_to_addr.addr );break;
-    case 3: printf("OP:\tRET_OP\t\tLENGTH: %d\t\tADDR: NA\n\n", ins->length );break;
-    case 4: printf("OP:\tOTHER_OP\t\tLENGTH: %d\t\tADDR: NA\n\n", ins->length );break;
+    case 0: printf("OP:\tMOV_ADDR_TO_REG_OP\t\tLENGTH: %d\t\tADDR: %llu\n", ins->length, (long long unsigned int)ins->mov_addr_to_reg.addr );break;
+    case 1: printf("OP:\tJMP_TO_ADDR_OP\t\t\tLENGTH: %d\t\tADDR: %llu\n", ins->length, (long long unsigned int)ins->jmp_to_addr.addr);break;
+    case 2: printf("OP:\tMAYBE_JMP_TO_ADDR_OP\t\tLENGTH: %d\t\tADDR: %llu\n", ins->length,(long long unsigned int) ins->maybe_jmp_to_addr.addr );break;
+    case 3: printf("OP:\tRET_OP\t\t\t\tLENGTH: %d\t\tADDR: NA\n", ins->length );break;
+    case 4: printf("OP:\tOTHER_OP\t\t\tLENGTH: %d\t\tADDR: NA\n", ins->length );break;
   }
 
   return 0;
@@ -385,7 +391,7 @@ int p_shdrs(Elf64_Ehdr*  ehdr, char* name, int on_off)
 {
   int indx = -1;
 
-  DEBUG_PRINT(("------------------------------SECTION HDR NAMES------------------------\n"));
+  if(on_off) DEBUG_PRINT(("------------------------------SECTION HDR NAMES------------------------\n"));
   Elf64_Shdr *shdrs = (void*)ehdr+ehdr->e_shoff;
   char *strs = (void*)ehdr+shdrs[ehdr->e_shstrndx].sh_offset;
   int i;
@@ -398,7 +404,7 @@ int p_shdrs(Elf64_Ehdr*  ehdr, char* name, int on_off)
         indx = i;
   } 
 
-  DEBUG_PRINT(("------------------------------SECTION HDR NAMES------------------------\n"));
+  if(on_off) DEBUG_PRINT(("------------------------------SECTION HDR NAMES------------------------\n"));
 
   return indx;
 }
